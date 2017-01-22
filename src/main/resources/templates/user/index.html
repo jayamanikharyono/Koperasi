@@ -7,21 +7,9 @@
 <header th:replace="layout :: site-header" >
 </header>
 	<div class="jumbotron">
-	  <h1>Welcome User</h1>
-	  <p>Sistem Infromasi Rumah Sakit</p>
+	  <h1>User</h1>
+	  <p>Koperasi Mandiri</p>
 	</div>
-	<div class="col-4">
-			<table class="table">
-				<tr>
-					<th>Room Number</th>
-					<th>category</th>
-				</tr>
-				<tr th:each="room : ${allroom}">
-					<td th:text="${room.roomNumber}"></td>
-					<td th:text="${room.idCategory}"></td>
-				</tr>
-			</table>
-		</div>
-<footer th:replace="layout :: site-footer" />
+<footer th:replace="layout :: site-footer" ></footer>
 </body>
 </html>

@@ -7,36 +7,9 @@
 <header th:replace="layout :: site-header" >
 </header>
 	<div class="jumbotron">
-	  <h1>Welcome Admin</h1>
-	  <p>Sistem Infromasi Rumah Sakit</p>
+	  <h1>Admin</h1>
+	  <p>Koperasi Mandiri</p>
 	</div>
-	<a href="admin/indexPatient.html" th:href="@{/admin/indexPatient}">Daftar Pasien</a>
-	<div class="col-4">
-			<h2 class="left">Data Pasien Rawat Inap</h2>
-			<form th:object="${patient}" th:action="@{/createPatient}" method="post">
-				<input type="hidden" class="form-input" th:field="*{id}" name="id"/>
-				<input type="text" class="form-input" placeholder="Name" th:field="*{name}"/>
-				<input type="text" class="form-input" placeholder="Gender" th:field="*{gender}"/>
-				<input type="text" class="form-input" placeholder="BirstDate" th:field="*{birthDate}"/>
-				<input type="text" class="form-input" placeholder="religion" th:field="*{religion}"/>
-				<input type="text" class="form-input" placeholder="Address" th:field="*{address}"/>
-				<input type="text" class="form-input" placeholder="Room Number" th:field="*{roomNumber}"/>
-				<input type="text" class="form-input" placeholder="ID Dokter Rujukan" th:field="*{idDokterRujuk}"/>
-				<input type="submit" value="Daftarkan Pasien" class="btn right" />
-			</form>
-		</div>
-		<div class="col-4">
-			<table class="table">
-				<tr>
-					<th>Docter Id</th>
-					<th>Docter Name</th>
-				</tr>
-				<tr th:each="docter : ${alldocter}">
-					<td th:text="${docter.id}"></td>
-					<td th:text="${docter.name}"></td>
-				</tr>
-			</table>
-		</div>
 <footer th:replace="layout :: site-footer" ></footer>
 </body>
 </html>

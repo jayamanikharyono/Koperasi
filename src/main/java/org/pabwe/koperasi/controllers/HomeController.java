@@ -39,11 +39,15 @@ public class HomeController
 				System.out.println(userloggedin.getFullName());
 				if(userloggedin.getRole().equalsIgnoreCase("admin"))
 				{
-					return "/admin/index";
+					return "redirect:/admin/index";
 				}
 				else if(userloggedin.getRole().equalsIgnoreCase("user"))
 				{
-					return "/user/index";
+					return "redirect:/user/index";
+				}
+				else if(userloggedin.getRole().equalsIgnoreCase("officer"))
+				{
+					return "redirect:/officer/index";
 				}
 			}
 		}
@@ -52,5 +56,20 @@ public class HomeController
 			return "redirect:/";
 		}
 		return null;
+	}
+	@RequestMapping("/admin/index")
+	public String adminIndex()
+	{
+		return "/admin/index";
+	}
+	@RequestMapping("/user/index")
+	public String userIndex()
+	{
+		return "/user/index";
+	}
+	@RequestMapping("/officer/index")
+	public String petugasIndex()
+	{
+		return "/officer/index";
 	}
 }
