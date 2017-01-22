@@ -2,14 +2,16 @@ package org.pabwe.koperasi.services;
 
 import java.util.List;
 
-import org.pabwe.koperasi.models.User;
+import org.pabwe.koperasi.models.Pinjaman;
+
+
 
 
 public interface PinjamanService 
 {
-	public void save(User user);
-	public List<User> findAllUser();
-	User findById(int id);
-	User edit(User user);
-	void deleteById(int id);
+	public void save(Pinjaman pinjaman);
+	public List<Pinjaman> findAllPinjaman();
+	Pinjaman findById(int idPinjaman);
+	Pinjaman edit(Pinjaman pinjaman);
+	void deleteById(int idPinjaman);
 }

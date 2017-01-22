@@ -57,11 +57,6 @@ public class HomeController
 		}
 		return null;
 	}
-	@RequestMapping("/admin/index")
-	public String adminIndex()
-	{
-		return "/admin/index";
-	}
 	@RequestMapping("/user/index")
 	public String userIndex()
 	{
