@@ -35,7 +35,7 @@ public class SimpananServiceImpl implements SimpananService
 	public void deleteById(int idSimpanan) {
 		simpananService.deleteById(idSimpanan);
 	}
+}
 
 	
 
-}
