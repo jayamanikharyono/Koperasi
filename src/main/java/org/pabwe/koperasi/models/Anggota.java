@@ -17,15 +17,15 @@ public class Anggota {
 	private String alamat;
 	private String kota;
 	private String telepon;
-	private double banyakSimpanan;
+	private double banyakSimpananWajib;
+	private double banyakSimpananSukarela;
 	private double banyakPinjaman;
 	
 	public Anggota() {
 		super();
 	}
-	
 	public Anggota(int id, String nama, int idKtp, String jK, String alamat, String kota, String telepon,
-			double banyakSimpanan, double banyakPinjaman) {
+			double banyakSimpananWajib, double banyakSimpananSukarela, double banyakPinjaman) {
 		super();
 		this.id = id;
 		this.nama = nama;
@@ -34,10 +34,32 @@ public class Anggota {
 		this.alamat = alamat;
 		this.kota = kota;
 		this.telepon = telepon;
-		this.banyakSimpanan = banyakSimpanan;
+		this.banyakSimpananWajib = banyakSimpananWajib;
+		this.banyakSimpananSukarela = banyakSimpananSukarela;
 		this.banyakPinjaman = banyakPinjaman;
 	}
-	
+
+
+	public double getBanyakSimpananWajib() {
+		return banyakSimpananWajib;
+	}
+
+
+	public void setBanyakSimpananWajib(double banyakSimpananWajib) {
+		this.banyakSimpananWajib = banyakSimpananWajib;
+	}
+
+
+	public double getBanyakSimpananSukarela() {
+		return banyakSimpananSukarela;
+	}
+
+
+	public void setBanyakSimpananSukarela(double banyakSimpananSukarela) {
+		this.banyakSimpananSukarela = banyakSimpananSukarela;
+	}
+
+
 	public int getId() {
 		return id;
 	}
@@ -79,12 +101,6 @@ public class Anggota {
 	}
 	public void setTelepon(String telepon) {
 		this.telepon = telepon;
-	}
-	public double getBanyakSimpanan() {
-		return banyakSimpanan;
-	}
-	public void setBanyakSimpanan(double banyakSimpanan) {
-		this.banyakSimpanan = banyakSimpanan;
 	}
 	public double getBanyakPinjaman() {
 		return banyakPinjaman;

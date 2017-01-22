@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.pabwe.koperasi.models.Anggota;
 import org.pabwe.koperasi.models.Pinjaman;
+import org.pabwe.koperasi.models.Simpanan;
 import org.pabwe.koperasi.repositories.AnggotaRepository;
 import org.pabwe.koperasi.services.AnggotaService;
 import org.pabwe.koperasi.services.PinjamanService;
