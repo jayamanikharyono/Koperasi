@@ -2,6 +2,7 @@ package org.pabwe.koperasi.services;
 
 import java.util.List;
 
+import org.pabwe.koperasi.models.Simpanan;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,13 +22,13 @@ public class SimpananServiceImpl implements SimpananService
 	}
 
 	@Override
-	public User findById(int idSimpanan) {
+	public Simpanan findById(int idSimpanan) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public User edit(Simpanan Simpanan) {
+	public Simpanan edit(Simpanan Simpanan) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -38,4 +39,5 @@ public class SimpananServiceImpl implements SimpananService
 		
 	}
 
+	
 }
