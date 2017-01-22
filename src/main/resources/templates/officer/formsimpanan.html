@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layoutadmin :: site-head">
+<title>Koperasi Mandiri | Admin</title>
+</head>
+<body>
+	<header th:replace="layoutadmin :: site-header"> </header>
+	<h3>Tambah Simpanan</h3>
+	<h4 th:text="${warning}"></h4>
+	<form th:action="@{/officer/saveSimpanan}" method="POST">
+		<label>Tanggal Simpanan</label><br></br>
+		<input type="text" name="tanggal"></input><br></br>
+		<label>Id Anggota</label><br></br>
+		<input type="text" name="id"></input><br></br>
+		<label>Jenis Simpanan</label><br></br>
+		<select name="tipeSimpanan">
+			<option value="Simpanan Wajib">Simpanan Wajib</option>
+			<option value="Simpanan Sukarela">Simpanan Sukarela</option>
+		</select><br></br>
+		<label>Jumlah</label><br></br>
+		<input type="text" name="simpanan"></input><br></br>
+		<label>Keterangan</label><br></br>
+		<textarea rows="4" cols="" name="ket"></textarea><br></br>
+		<input type="submit" value="Simpan"></input>
+	</form>
+</body>
+</html>

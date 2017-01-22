@@ -23,10 +23,9 @@ public class Simpanan {
 	public Simpanan() {
 		super();
 	}
-	public Simpanan(Integer id, Integer idAnggota, String namaAnggota, String tglSimpanan, String tipeSimpanan,
+	public Simpanan(Integer idAnggota, String namaAnggota, String tglSimpanan, String tipeSimpanan,
 			double simpanan, String ket) {
 		super();
-		this.id = id;
 		this.idAnggota = idAnggota;
 		this.namaAnggota = namaAnggota;
 		this.tglSimpanan = tglSimpanan;
