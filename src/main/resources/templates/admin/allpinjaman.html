@@ -6,13 +6,12 @@
 <body>
 <header th:replace="layoutadmin :: site-header" >
 </header>
-	<div class="tab-content">
-	  <div id="pinjaman" class="tab-pane fade">
+	  <div id="pinjaman">
 	    <h3>Pinjaman</h3>
 	    <p>Daftar Pinjaman</p>
 	    <table class="table .table-striped">
 	    	<tr>
-	    		<th>No</th>
+	    		<th>Id Anggota</th>
 	    		<th>Nama Anggota</th>
 	    		<th>Jumlah Pinjaman</th>
 	    		<th>Tanggal Pinjaman</th>
@@ -21,21 +20,22 @@
 	    		<th>Status</th>
 	    		<th>Keterangan</th>
 	    		<th>Angsuran Total</th>
+	    		<th>Pilihan</th>
 	    	</tr>
-	    	<tr>
-	    		<td></td>
-	    		<td></td>
-	    		<td></td>
-	    		<td></td>
-	    		<td></td>
-	    		<td></td>
-	    		<td></td>
-	    		<td></td>
+	    	<tr th:each="pinjaman : ${allpinjaman}">
+	    		<td th:text="${pinjaman.idAnggota}"></td>
+	    		<td th:text="${pinjaman.namaAnggota}"></td>
+	    		<td th:text="${pinjaman.jumlahPinjaman}"></td>
+	    		<td th:text="${pinjaman.tanggalPinjam}"></td>
+	    		<td th:text="${pinjaman.waktu}"></td>
+	    		<td th:text="${pinjaman.angsuranPokok}"></td>
+	    		<td th:text="${pinjaman.status}"></td>
+	    		<td th:text="${pinjaman.ket}"></td>
+	    		<td th:text="${pinjaman.angsuranTotal}"></td>
 	    		<td></td>
 	    	</tr>
 	    </table>
 	  </div>
-	</div>
 <footer th:replace="layoutadmin :: site-footer" ></footer>
 </body>
 </html>

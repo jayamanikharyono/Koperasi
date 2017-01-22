@@ -2,9 +2,12 @@ package org.pabwe.koperasi.controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.pabwe.koperasi.models.Anggota;
 import org.pabwe.koperasi.models.Pinjaman;
 import org.pabwe.koperasi.models.Simpanan;
+import org.pabwe.koperasi.models.User;
 import org.pabwe.koperasi.services.AnggotaService;
 import org.pabwe.koperasi.services.PinjamanService;
 import org.pabwe.koperasi.services.SimpananService;
@@ -21,21 +24,34 @@ public class AdminController
 	@Autowired
 	AnggotaService anggotaService;
 	@Autowired
-	SimpananService simpananService; 
+	SimpananService simpananService;
+	User userloggedin;
 	
 	@RequestMapping("/admin/index")
-	public String adminIndex(Model model)
+	public String adminIndex(Model model, HttpServletRequest request)
 	{
+		userloggedin = (User) request.getSession().getAttribute("userLogin");
+		model.addAttribute("loggedin",userloggedin.getFullName());
 		System.out.println("Admin");
-		return "/admin/index";
+		return "/admin/adminIndex";
 	}
 	
 	@RequestMapping("/admin/simpanan")
-	public String indexSimpanan(Model model)
+	public String indexSimpanan(Model model, HttpServletRequest request)
 	{
+		if(null==((User) request.getSession().getAttribute("userLogin")))
+		{
+			return "redirect:/";
+		}
 		List<Simpanan> listSimpanan = simpananService.findAllSimpanan();
 		model.addAttribute("allsimpanan",listSimpanan);
 		return "/admin/allsimpanan";
+	}
+	@RequestMapping("admin/logout")
+	public String logout(HttpServletRequest request)
+	{
+		request.getSession().setAttribute("userLogin", null);
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/admin/pinjaman")

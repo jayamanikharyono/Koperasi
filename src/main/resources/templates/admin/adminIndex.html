@@ -8,7 +8,7 @@
 </header>
 	<div class="jumbotron">
 	  <h1>Admin</h1>
-	  <p>Welcome Admin</p>
+	  <p>Welcome <a th:text="${loggedin}"></a></p>
 	</div>
 <footer th:replace="layoutadmin :: site-footer" ></footer>
 </body>
