@@ -26,13 +26,31 @@ public class AdminController
 	@RequestMapping("/admin/index")
 	public String adminIndex(Model model)
 	{
-		List<Pinjaman> listPinjaman = pinjamanService.findAllPinjaman();
-		List<Anggota> listAnggota = anggotaService.findAllAnggota();
-		List<Simpanan> listSimpanan = simpananService.findAllSimpanan();
-		model.addAttribute("allpinjaman",listPinjaman);
-		model.addAttribute("allanggota",listAnggota);
-		model.addAttribute("allsimpanan",listSimpanan);
 		System.out.println("Admin");
 		return "/admin/index";
+	}
+	
+	@RequestMapping("/admin/simpanan")
+	public String indexSimpanan(Model model)
+	{
+		List<Simpanan> listSimpanan = simpananService.findAllSimpanan();
+		model.addAttribute("allsimpanan",listSimpanan);
+		return "/admin/allsimpanan";
+	}
+	
+	@RequestMapping("/admin/pinjaman")
+	public String indexPinjaman(Model model)
+	{
+		List<Pinjaman> listPinjaman = pinjamanService.findAllPinjaman();
+		model.addAttribute("allpinjaman",listPinjaman);
+		return "/admin/allpinjaman";
+	}
+	
+	@RequestMapping("/admin/anggota")
+	public String indexAnggota(Model model)
+	{
+		List<Anggota> listAnggota = anggotaService.findAllAnggota();
+		model.addAttribute("allanggota",listAnggota);
+		return "/admin/allanggota";
 	}
 }
