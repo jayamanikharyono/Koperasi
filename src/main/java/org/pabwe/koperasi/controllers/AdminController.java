@@ -5,11 +5,9 @@ import java.util.List;
 import org.pabwe.koperasi.models.Anggota;
 import org.pabwe.koperasi.models.Pinjaman;
 import org.pabwe.koperasi.models.Simpanan;
-import org.pabwe.koperasi.repositories.AnggotaRepository;
 import org.pabwe.koperasi.services.AnggotaService;
 import org.pabwe.koperasi.services.PinjamanService;
 import org.pabwe.koperasi.services.SimpananService;
-import org.pabwe.koperasi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +32,7 @@ public class AdminController
 		model.addAttribute("allpinjaman",listPinjaman);
 		model.addAttribute("allanggota",listAnggota);
 		model.addAttribute("allsimpanan",listSimpanan);
+		System.out.println("Admin");
 		return "/admin/index";
 	}
 }
