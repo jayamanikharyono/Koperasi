@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout :: site-head">
+<title>Welcome to Spring Ticket</title>
+</head>
+<body>
+<header th:replace="layout :: site-header" >
+</header>
+<main id="posts">
+	<div class="jumbotron">
+	  <h1>Sistem Infromasi Rumah Sakit</h1>
+	  <p>(SIMRS)</p>
+	</div>
+	<div class="col-2"></div>
+	<div class="col-3 vertical-line-right">
+		<h2 class="right">Log In </h2>
+		<form th:action="@{/login}" method="POST">
+			<input type="text" class="form-input" placeholder="Username" name="username"/>
+			<input type="password" class="form-input" placeholder="Password" name="password"/>
+			<input type="submit" value="Log In" class="btn-outline right"/>
+		</form>
+	</div>
+</main>
+<footer th:replace="layout :: site-footer" ></footer>
+</body>
+</html>

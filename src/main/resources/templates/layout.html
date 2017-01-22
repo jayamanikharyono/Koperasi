@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="site-head">
+<meta charset="UTF-8" />
+<link rel="stylesheet" href="../public/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+<meta th:include="this::head" th:remove="tag"/>
+</head>
+<body>
+<header th:fragment="site-header">
+</header>
+<div class="jumbotron">
+  <h1>Welcome</h1>
+  <p>Sistem Infromasi Rumah Sakit (SIMRS)</p>
+  <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+</div>
+<footer th:fragment="site-footer">
+&copy; PABWE,2017
+</footer>
+</body>
+</html>
