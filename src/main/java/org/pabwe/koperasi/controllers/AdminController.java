@@ -27,9 +27,18 @@ public class AdminController
 	SimpananService simpananService;
 	User userloggedin;
 	
+	public String loginCheck(HttpServletRequest request)
+	{
+		if(((User) request.getSession().getAttribute("userLogin")).getFullName() == null)
+		{
+			return "redirect:/";
+		}
+		return null;
+	}
 	@RequestMapping("/admin/index")
 	public String adminIndex(Model model, HttpServletRequest request)
 	{
+		loginCheck(request);
 		userloggedin = (User) request.getSession().getAttribute("userLogin");
 		model.addAttribute("loggedin",userloggedin.getFullName());
 		System.out.println("Admin");
@@ -39,10 +48,7 @@ public class AdminController
 	@RequestMapping("/admin/simpanan")
 	public String indexSimpanan(Model model, HttpServletRequest request)
 	{
-		if(null==((User) request.getSession().getAttribute("userLogin")))
-		{
-			return "redirect:/";
-		}
+		loginCheck(request);
 		List<Simpanan> listSimpanan = simpananService.findAllSimpanan();
 		model.addAttribute("allsimpanan",listSimpanan);
 		return "/admin/allsimpanan";
@@ -50,21 +56,24 @@ public class AdminController
 	@RequestMapping("admin/logout")
 	public String logout(HttpServletRequest request)
 	{
-		request.getSession().setAttribute("userLogin", null);
+		userloggedin = null;
+		request.getSession().removeAttribute("userLogin");
 		return "redirect:/";
 	}
 	
 	@RequestMapping("/admin/pinjaman")
-	public String indexPinjaman(Model model)
+	public String indexPinjaman(Model model,HttpServletRequest request)
 	{
+		loginCheck(request);
 		List<Pinjaman> listPinjaman = pinjamanService.findAllPinjaman();
 		model.addAttribute("allpinjaman",listPinjaman);
 		return "/admin/allpinjaman";
 	}
 	
 	@RequestMapping("/admin/anggota")
-	public String indexAnggota(Model model)
+	public String indexAnggota(Model model, HttpServletRequest request)
 	{
+		loginCheck(request);
 		List<Anggota> listAnggota = anggotaService.findAllAnggota();
 		model.addAttribute("allanggota",listAnggota);
 		return "/admin/allanggota";

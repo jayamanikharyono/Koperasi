@@ -35,7 +35,10 @@ public class User
 		// TODO Auto-generated constructor stub
 	}
 
-
+	public User(String fullname)
+	{
+		this.fullName = fullname;
+	}
 
 
 	public User(int idUser, String username, String password, String fullName, String role) {

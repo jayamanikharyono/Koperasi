@@ -1,16 +1,10 @@
 package org.pabwe.koperasi.controllers;
 
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.pabwe.koperasi.models.Anggota;
-import org.pabwe.koperasi.models.Pinjaman;
-import org.pabwe.koperasi.models.Simpanan;
+
 import org.pabwe.koperasi.models.User;
-import org.pabwe.koperasi.services.AnggotaService;
-import org.pabwe.koperasi.services.PinjamanService;
-import org.pabwe.koperasi.services.SimpananService;
 import org.pabwe.koperasi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
