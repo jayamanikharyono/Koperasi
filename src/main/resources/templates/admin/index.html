@@ -10,6 +10,69 @@
 	  <h1>Admin</h1>
 	  <p>Koperasi Mandiri</p>
 	</div>
+	<ul class="nav nav-tabs">
+  		<li class="active"><a data-toggle="tab" href="#home">Anggota</a></li>
+  		<li><a data-toggle="tab" href="#menu1">Simpanan</a></li>
+  		<li><a data-toggle="tab" href="#menu2">Pinjaman</a></li>
+	</ul>
+	<div class="tab-content">
+	  <div id="home" class="tab-pane fade in active">
+	    <h3>Anggota</h3>
+	    <p>Daftar Anggota.</p>
+	    <table class="table .table-striped">
+	    	<tr>
+	    		<th>No</th>
+	    		<th>ID</th>
+	    		<th>Id Ktp</th>
+	    		<th>Nama</th>
+	    		<th>Jk</th>
+	    		<th>Kota</th>
+	    		<th>Telepon</th>
+	    		<th>Aksi</th>
+	    	</tr>
+	    	<tr>
+	    		<td></td>
+	    		<td></td>
+	    		<td></td>
+	    		<td></td>
+	    		<td></td>
+	    		<td></td>
+	    		<td></td>
+	    		<td></td>
+	    	</tr>
+	    </table>
+	  </div>
+	  <div id="menu1" class="tab-pane fade">
+	    <h3>Simpanan</h3>
+	    <p>Daftar Simpanan</p>
+	    <table class="table .table-striped">
+	    	<tr>
+	    		<th>No</th>
+	    		<th>ID Anggota</th>
+	    		<th>ID Ktp</th>
+	    		<th>Nama Anggota</th>
+	    		<th>JK</th>
+	    		<th>Kota</th>
+	    		<th>Telepon</th>
+	    		<th>Aksi</th>
+	    	</tr>
+	    	<tr>
+	    		<td></td>
+	    		<td></td>
+	    		<td></td>
+	    		<td></td>
+	    		<td></td>
+	    		<td></td>
+	    		<td></td>
+	    		<td></td>
+	    	</tr>
+	    </table>
+	  </div>
+	  <div id="menu2" class="tab-pane fade">
+	    <h3>Pinjaman</h3>
+	    <p>Daftar Pinjaman</p>
+	  </div>
+	</div>
 <footer th:replace="layout :: site-footer" ></footer>
 </body>
 </html>
