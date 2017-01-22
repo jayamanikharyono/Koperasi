@@ -21,7 +21,7 @@ public class AdminController
 	@Autowired
 	AnggotaService anggotaService;
 	@Autowired
-	SimpananService simpananService;
+	SimpananService simpananService; 
 	
 	@RequestMapping("/admin/index")
 	public String adminIndex(Model model)
