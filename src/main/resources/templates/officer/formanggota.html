@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layoutadmin :: site-head">
+<title>Koperasi Mandiri | Admin</title>
+</head>
+<body>
+<h1>Form Anggota</h1><br></br>
+	<form th:action="@{officer/simpanpendaftar}" method="POST">
+		<label>ID KTP</label><br></br>
+		<input type="text" name="idKTP">
+	</form>
+</body>
+</html>

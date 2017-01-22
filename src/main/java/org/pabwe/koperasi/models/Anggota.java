@@ -24,10 +24,9 @@ public class Anggota {
 	public Anggota() {
 		super();
 	}
-	public Anggota(int id, String nama, int idKtp, String jK, String alamat, String kota, String telepon,
+	public Anggota(String nama, int idKtp, String jK, String alamat, String kota, String telepon,
 			double banyakSimpananWajib, double banyakSimpananSukarela, double banyakPinjaman) {
 		super();
-		this.id = id;
 		this.nama = nama;
 		this.idKtp = idKtp;
 		this.jK = jK;
