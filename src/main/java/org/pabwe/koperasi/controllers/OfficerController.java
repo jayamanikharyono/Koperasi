@@ -4,8 +4,10 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.pabwe.koperasi.models.Anggota;
 import org.pabwe.koperasi.models.Simpanan;
+import org.pabwe.koperasi.models.User;
 import org.pabwe.koperasi.services.AnggotaService;
 import org.pabwe.koperasi.services.SimpananService;
+import org.pabwe.koperasi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +20,17 @@ public class OfficerController {
 	AnggotaService anggotaService;
 	@Autowired
 	SimpananService simpananService;
+	@Autowired
+	UserService userService;
 	
 	@RequestMapping("/officer/simpan")
 	public String simpanan(){
 		return "officer/formSimpanan";
+	}
+	
+	@RequestMapping("/officer/formanggota")
+	public String showFormAnggota(){
+		return "officer/formanggota";
 	}
 	
 	@RequestMapping(value = "/officer/saveSimpanan", method = RequestMethod.POST)
@@ -49,6 +58,23 @@ public class OfficerController {
 			anggotaService.save(anggota);
 		}
 		simpananService.save(save);
+		return "officer/index";
+	}
+	
+	@RequestMapping(value = "officer/simpanpendaftar", method = RequestMethod.POST)
+	public String saveAnggota(Model model, HttpServletRequest request){
+		String nama = request.getParameter("nama");
+		int idKTP = Integer.parseInt(request.getParameter("idKTP"));
+		String jenisKelamin = request.getParameter("jenisKelamin");
+		String alamat = request.getParameter("alamat");
+		String kota = request.getParameter("kota");
+		String telepon = request.getParameter("telepon");
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		User user = new User(username, password, nama, "user");
+		userService.save(user);
+		Anggota anggota = new Anggota(nama, idKTP, jenisKelamin, alamat, kota, telepon);
+		anggotaService.save(anggota);
 		return "officer/index";
 	}
 }

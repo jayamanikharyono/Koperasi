@@ -41,9 +41,8 @@ public class User
 	}
 
 
-	public User(int idUser, String username, String password, String fullName, String role) {
+	public User(String username, String password, String fullName, String role) {
 		super();
-		this.idUser = idUser;
 		this.username = username;
 		this.password = password;
 		this.fullName = fullName;

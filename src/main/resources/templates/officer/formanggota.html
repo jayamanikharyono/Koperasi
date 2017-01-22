@@ -5,9 +5,27 @@
 </head>
 <body>
 <h1>Form Anggota</h1><br></br>
-	<form th:action="@{officer/simpanpendaftar}" method="POST">
+	<form th:action="@{/officer/simpanpendaftar}" method="POST">
+		<label>Nama</label><br></br>
+		<input type="text" name="nama"></input><br></br>
 		<label>ID KTP</label><br></br>
-		<input type="text" name="idKTP">
+		<input type="text" name="idKTP"></input><br></br>
+		<label>Jenis Kelamin</label><br></br>
+		<input type="radio" value="L" name="jenisKelamin">Laki - laki</input>
+		<input type="radio" value="P" name="jenisKelamin">Perempuan</input><br></br>
+		<label>Alamat</label><br></br>
+		<textarea rows="4" cols="" name="alamat"></textarea><br></br>
+		<label>Kota</label>
+		<input type="text" name="kota"></input><br></br>
+		<label>Telepon</label><br></br>
+		<input type="text" name="telepon"></input><br></br>
+		<label>Username</label><br></br>
+		<input type="text" name="username"></input><br></br>
+		<label>Password</label><br></br>
+		<input type="password" name="password"></input><br></br>
+		<label>Simpanan Pokok</label><br></br>
+		<input type="text" readonly="readonly" value="50000"></input><br></br>
+		<input type="submit" value="Simpan"></input><br></br>
 	</form>
 </body>
 </html>

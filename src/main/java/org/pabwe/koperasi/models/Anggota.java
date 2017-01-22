@@ -17,15 +17,14 @@ public class Anggota {
 	private String alamat;
 	private String kota;
 	private String telepon;
-	private double banyakSimpananWajib;
-	private double banyakSimpananSukarela;
-	private double banyakPinjaman;
+	private double banyakSimpananWajib = 0;
+	private double banyakSimpananSukarela = 0;
+	private double banyakPinjaman = 0;
 	
 	public Anggota() {
 		super();
 	}
-	public Anggota(String nama, int idKtp, String jK, String alamat, String kota, String telepon,
-			double banyakSimpananWajib, double banyakSimpananSukarela, double banyakPinjaman) {
+	public Anggota(String nama, int idKtp, String jK, String alamat, String kota, String telepon) {
 		super();
 		this.nama = nama;
 		this.idKtp = idKtp;
@@ -33,9 +32,6 @@ public class Anggota {
 		this.alamat = alamat;
 		this.kota = kota;
 		this.telepon = telepon;
-		this.banyakSimpananWajib = banyakSimpananWajib;
-		this.banyakSimpananSukarela = banyakSimpananSukarela;
-		this.banyakPinjaman = banyakPinjaman;
 	}
 
 
