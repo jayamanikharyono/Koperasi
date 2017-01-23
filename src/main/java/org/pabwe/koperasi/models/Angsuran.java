@@ -1,5 +1,6 @@
 package org.pabwe.koperasi.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,11 +15,12 @@ public class Angsuran {
 	private String tanggalJatuhTempo;
 	private String tanggalBayar;
 	private double jumlah;
+	
+	@Column(nullable = true)
 	private String keterangan;
-	public Angsuran(int id, int idPinjaman, String tanggalJatuhTempo, String tanggalBayar, double jumlah,
+	public Angsuran(int idPinjaman, String tanggalJatuhTempo, String tanggalBayar, double jumlah,
 			String keterangan) {
 		super();
-		this.id = id;
 		this.idPinjaman = idPinjaman;
 		this.tanggalJatuhTempo = tanggalJatuhTempo;
 		this.tanggalBayar = tanggalBayar;

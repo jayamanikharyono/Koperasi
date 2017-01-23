@@ -1,5 +1,6 @@
 package org.pabwe.koperasi.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,7 @@ public class Pinjaman {
 	private String waktu;
 	private double angsuranPokok; //total yang harus dibayar perbulan
 	private String status;
+	@Column(nullable = true)
 	private String ket;
 	private double angsuranTotal; //total yang harus dibayar;
 	
