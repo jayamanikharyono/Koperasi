@@ -33,7 +33,11 @@
 	    		<td th:text="${anggota.banyakSimpananWajib}"></td>
 	    		<td th:text="${anggota.banyakSimpananSukarela}"></td>
 	    		<td th:text="${anggota.banyakPinjaman}"></td>
-	    		<td></td>
+	    		<td>
+	    			<a th:href="@{'/admin/anggota/' + ${anggota.id}}">View</a>
+	    			<a th:href="@{'/admin/anggota/edit/' + ${anggota.id}}">Edit</a>
+	    			<a th:href="@{'/admin/anggota/delete/'+ ${anggota.id}}">Delete</a>
+	    		</td>
 	    	</tr>
 	    </table>
 	  </div>

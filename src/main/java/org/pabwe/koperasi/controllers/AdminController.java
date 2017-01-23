@@ -3,6 +3,7 @@ package org.pabwe.koperasi.controllers;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.pabwe.koperasi.models.Anggota;
 import org.pabwe.koperasi.models.Pinjaman;
@@ -14,6 +15,7 @@ import org.pabwe.koperasi.services.SimpananService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -78,4 +80,75 @@ public class AdminController
 		model.addAttribute("allanggota",listAnggota);
 		return "/admin/allanggota";
 	}
+	
+	
+	
+	
+	//Anggota
+	@RequestMapping("admin/anggota/{id}")
+	public String showAnggota(@PathVariable Integer id, Model model)
+	{
+		model.addAttribute("anggota",anggotaService.findById(id));
+		return "admin/anggota/show";
+	}
+	
+	@RequestMapping("admin/anggota/edit/{id}")
+	public String editAnggota(@PathVariable Integer id, Model model)
+	{
+		model.addAttribute("anggota",anggotaService.findById(id));
+		return "admin/anggota/edit";
+	}
+	
+	@RequestMapping("admin/anggota/delete/{id}")
+	public String deleteAnggota(@PathVariable Integer id)
+	{
+		anggotaService.deleteById(id);
+		return "redirect:/admin/index";
+	}
+	
+	//Simpanan
+	@RequestMapping("admin/simpanan/{id}")
+	public String showSimpanan(@PathVariable Integer id, Model model)
+	{
+		model.addAttribute("simpanan",simpananService.findById(id));
+		return "admin/simpanan/show";
+	}
+	
+	@RequestMapping("admin/simpanan/edit/{id}")
+	public String editSimpanan(@PathVariable Integer id, Model model)
+	{
+		model.addAttribute("simpanan",simpananService.findById(id));
+		return "admin/simpanan/edit";
+	}
+	
+	@RequestMapping("admin/simpanan/delete/{id}")
+	public String deleteSimpanan(@PathVariable Integer id)
+	{
+		simpananService.deleteById(id);
+		return "redirect:/admin/index";
+	}
+	
+	//Pinjaman
+	@RequestMapping("admin/pinjaman/{id}")
+	public String showPinjaman(@PathVariable Integer id, Model model)
+	{
+		model.addAttribute("pinjaman",pinjamanService.findById(id));
+		return "admin/pinjaman/show";
+	}
+	
+	@RequestMapping("admin/pinjaman/edit/{id}")
+	public String editPinjaman(@PathVariable Integer id, Model model)
+	{
+		model.addAttribute("pinjaman",pinjamanService.findById(id));
+		return "admin/pinjaman/edit";
+	}
+	
+	@RequestMapping("admin/pinjaman/delete/{id}")
+	public String deletePinjaman(@PathVariable Integer id)
+	{
+		pinjamanService.deleteById(id);
+		return "redirect:/admin/index";
+	}
+	
+	
 }
