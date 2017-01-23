@@ -1,5 +1,6 @@
 package org.pabwe.koperasi.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +17,7 @@ public class Simpanan {
 	private String tglSimpanan;
 	private String tipeSimpanan;
 	private double simpanan;
+	@Column(nullable = true)
 	private String ket;
 	
 	

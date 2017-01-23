@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Implementation-Title: Koperasi
 Implementation-Version: 0.0.1-SNAPSHOT
-Built-By: Jayuk
+Built-By: ￦ﾊﾘ￧ﾺﾸ￦ﾊﾘ￧ﾺﾸ
 Implementation-Vendor-Id: org.pabwe
-Build-Jdk: 1.8.0_111
+Build-Jdk: 1.8.0_101
 Implementation-URL: http://projects.spring.io/spring-boot/Koperasi/
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
