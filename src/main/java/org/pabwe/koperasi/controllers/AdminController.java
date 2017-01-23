@@ -3,6 +3,7 @@ package org.pabwe.koperasi.controllers;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.pabwe.koperasi.models.Anggota;
 import org.pabwe.koperasi.models.Pinjaman;
@@ -167,6 +168,24 @@ public class AdminController
 		pinjamanService.deleteById(id);
 		return "redirect:/admin/index";
 	}
-	
+	//Edit form
+	@RequestMapping("/editsimpanan")
+	public String editSimpanan(@Valid Simpanan simpanan)
+	{
+		simpananService.edit(simpanan);
+		return "/admin/indexallsimpanan";
+	}
+	@RequestMapping("/editpinjaman")
+	public String editPinjaman(@Valid Pinjaman pinjaman)
+	{
+		pinjamanService.edit(pinjaman);
+		return "/admin/indexallpinjaman";
+	}
+	@RequestMapping("/editanggota")
+	public String editAnggota(@Valid Anggota anggota)
+	{
+		anggotaService.edit(anggota);
+		return "/admin/indexallanggota";
+	}
 	
 }
