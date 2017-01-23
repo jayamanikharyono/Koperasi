@@ -9,7 +9,7 @@
 	<h4 th:text="${warning}"></h4>
 	<form th:action="@{/officer/saveSimpanan}" method="POST">
 		<label>Tanggal Simpanan</label><br></br>
-		<input type="text" name="tanggal"></input><br></br>
+		<input type="text" name="tanggal" th:value="${tanggal}" readonly="readonly"></input><br></br>
 		<label>Id Anggota</label><br></br>
 		<input type="text" name="id"></input><br></br>
 		<label>Jenis Simpanan</label><br></br>
@@ -23,5 +23,5 @@
 		<textarea rows="4" cols="" name="ket"></textarea><br></br>
 		<input type="submit" value="Simpan"></input>
 	</form>
-</body>
+	</body>
 </html>

@@ -1,5 +1,9 @@
 package org.pabwe.koperasi.controllers;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.pabwe.koperasi.models.Anggota;
@@ -24,7 +28,10 @@ public class OfficerController {
 	UserService userService;
 	
 	@RequestMapping("/officer/simpan")
-	public String simpanan(){
+	public String simpanan(Model model){
+		DateFormat df = new SimpleDateFormat("dd-mm-yyyy");
+		Date dateobj = new Date();
+		model.addAttribute("tanggal", df.format(dateobj));
 		return "officer/formSimpanan";
 	}
 	
