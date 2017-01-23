@@ -3,7 +3,6 @@ package org.pabwe.koperasi.controllers;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 
 import org.pabwe.koperasi.models.Anggota;
 import org.pabwe.koperasi.models.Pinjaman;
@@ -37,6 +36,7 @@ public class AdminController
 		}
 		return null;
 	}
+	
 	@RequestMapping("/admin/index")
 	public String adminIndex(Model model, HttpServletRequest request)
 	{
@@ -47,14 +47,6 @@ public class AdminController
 		return "/admin/adminIndex";
 	}
 	
-	@RequestMapping("/admin/simpanan")
-	public String indexSimpanan(Model model, HttpServletRequest request)
-	{
-		loginCheck(request);
-		List<Simpanan> listSimpanan = simpananService.findAllSimpanan();
-		model.addAttribute("allsimpanan",listSimpanan);
-		return "/admin/allsimpanan";
-	}
 	@RequestMapping("admin/logout")
 	public String logout(HttpServletRequest request)
 	{
@@ -62,26 +54,52 @@ public class AdminController
 		request.getSession().removeAttribute("userLogin");
 		return "redirect:/";
 	}
-	
-	@RequestMapping("/admin/pinjaman")
-	public String indexPinjaman(Model model,HttpServletRequest request)
+
+	//index all entity
+	@RequestMapping("/admin/indexallsimpanan")
+	public String indexSimpanan(Model model, HttpServletRequest request)
 	{
-		loginCheck(request);
-		List<Pinjaman> listPinjaman = pinjamanService.findAllPinjaman();
-		model.addAttribute("allpinjaman",listPinjaman);
-		return "/admin/allpinjaman";
+		return "redirect:/allsimpanan";
+	}
+		
+	@RequestMapping("/admin/indexallpinjaman")
+	public String indexPinjaman()
+	{
+		return "redirect:/allpinjaman";
 	}
 	
-	@RequestMapping("/admin/anggota")
-	public String indexAnggota(Model model, HttpServletRequest request)
+	@RequestMapping("/admin/indexallanggota")
+	public String indexAnggota()
+	{
+		return "redirect:/allanggota";
+	}
+	
+	
+	//redirect
+	@RequestMapping("allanggota")
+	public String allAnggota(Model model,HttpServletRequest request)
 	{
 		loginCheck(request);
 		List<Anggota> listAnggota = anggotaService.findAllAnggota();
 		model.addAttribute("allanggota",listAnggota);
 		return "/admin/allanggota";
 	}
-	
-	
+	@RequestMapping("allpinjaman")
+	public String allPinjaman(Model model,HttpServletRequest request)
+	{
+		loginCheck(request);
+		List<Pinjaman> listPinjaman = pinjamanService.findAllPinjaman();
+		model.addAttribute("allpinjaman",listPinjaman);
+		return "/admin/allpinjaman";
+	}
+	@RequestMapping("allsimpanan")
+	public String allSimpanan(Model model, HttpServletRequest request)
+	{
+		loginCheck(request);
+		List<Simpanan> listSimpanan = simpananService.findAllSimpanan();
+		model.addAttribute("allsimpanan",listSimpanan);
+		return "/admin/allsimpanan";
+	}
 	
 	
 	//Anggota

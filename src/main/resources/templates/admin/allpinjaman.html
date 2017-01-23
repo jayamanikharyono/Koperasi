@@ -33,9 +33,9 @@
 	    		<td th:text="${pinjaman.ket}"></td>
 	    		<td th:text="${pinjaman.angsuranTotal}"></td>
 	    		<td>
-	    			<a th:href="@{'/admin/pinjaman/' + ${anggota.id}}">View</a>
-	    			<a th:href="@{'/admin/pinjaman/edit/' + ${anggota.id}}">Edit</a>
-	    			<a th:href="@{'/admin/pinjaman/delete/'+ ${anggota.id}}">Delete</a>
+	    			<a th:href="@{'/admin/pinjaman/' + ${pinjaman.id}}">View</a>
+	    			<a th:href="@{'/admin/pinjaman/edit/' + ${pinjaman.id}}">Edit</a>
+	    			<a th:href="@{'/admin/pinjaman/delete/'+ ${pinjaman.id}}">Delete</a>
 	    		</td>
 	    	</tr>
 	    </table>
