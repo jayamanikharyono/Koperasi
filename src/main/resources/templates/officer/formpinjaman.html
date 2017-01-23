@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layoutadmin :: site-head">
+<script src="/public/js/jquery.min.js"></script>
+<title>Koperasi Mandiri | Admin</title>
+</head>
+<body>
+	<h1>Pinjaman</h1>
+	<form th:action="@{/officer/savePinjaman}">
+		<label>Tanggal Pinjaman</label><br></br> <input type="text"
+			readonly="readonly" th:value="${tanggal}"></input><br></br> 
+			<label>ID Anggota</label><br></br> 
+			<input type="text" name="idAnggota"></input><br></br>
+			<label>Jumlah</label><br></br> 
+			<input type="text" id="jumlah" name="jumlah"></input><br></br>
+			<label>Durasi</label><br></br> 
+			<select id="durasi" name="durasi"><br></br>
+				<option>3</option>
+				<option>6</option>
+				<option>12</option>
+		</select><br></br> 
+		<label>Angsuran Bulanan</label><br></br> 
+		<input type="text" name="angsuran" id="angsuran"></input><br></br>
+		<label>Ket</label><br></br>
+		<textarea rows="4" cols="" name="ket"></textarea><br></br>
+		<input type="submit" value="Simpan"></input]>
+	</form>
+</body>
+<script type="text/javascript">
+$("#jumlah").keyup(function(){
+    update();
+});
+
+$("#durasi").on('change', function(){
+    update();
+});
+
+
+
+function update() {
+	var n = $('#durasi').val();
+	if(n == 3){
+			$("#angsuran").val((($('#jumlah').val() * 0.01) + ($('#jumlah').val() / n)).toFixed(0))
+		} else if(n == 6){
+			$("#angsuran").val((($('#jumlah').val() * 0.015) + ($('#jumlah').val() / n)).toFixed(0))
+			} else {
+				$("#angsuran").val((($('#jumlah').val() * 0.02) + ($('#jumlah').val() / n)).toFixed(0))
+				}
+}
+</script>
+
+</html>

@@ -40,6 +40,11 @@ public class OfficerController {
 		return "officer/formanggota";
 	}
 	
+	@RequestMapping("/officer/pinjaman")
+	public String showFormPinjaman(){
+		return "officer/formpinjaman";
+	}
+	
 	@RequestMapping(value = "/officer/saveSimpanan", method = RequestMethod.POST)
 	public String saveSimpanan(Model model, HttpServletRequest request){
 		String tanggalSimpanan = request.getParameter("tanggal");
