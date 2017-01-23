@@ -20,8 +20,6 @@ public class Simpanan {
 	@Column(nullable = true)
 	private String ket;
 	
-	
-	
 	public Simpanan() {
 		super();
 	}
