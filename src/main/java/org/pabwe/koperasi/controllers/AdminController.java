@@ -69,6 +69,14 @@ public class AdminController
 		request.getSession().removeAttribute("userLogin");
 		return "redirect:/";
 	}
+	
+	@RequestMapping("/admin/insert")
+	public String insertForm(Model model,HttpServletRequest request)
+	{
+		model.addAttribute("anggota",new Anggota());
+		model.addAttribute("petugas", new Petugas());
+		return "/admin/insert";
+	}
 
 	//index all entity
 	@RequestMapping("/admin/indexallsimpanan")
