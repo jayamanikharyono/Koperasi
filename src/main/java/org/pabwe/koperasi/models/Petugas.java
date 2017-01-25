@@ -20,7 +20,8 @@ public class Petugas {
 		super();
 	}
 	
-	public Petugas(int id, String nama, String alamat, String kota, String jK, String noHP) {
+	public Petugas(int id, String nama, String alamat, String kota, String jK, String noHP) 
+	{
 		super();
 		this.id = id;
 		this.nama = nama;

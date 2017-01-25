@@ -27,6 +27,7 @@ public class AdminController
 	AnggotaService anggotaService;
 	@Autowired
 	SimpananService simpananService;
+	
 	User userloggedin;
 	
 	public String loginCheck(HttpServletRequest request)
@@ -58,7 +59,7 @@ public class AdminController
 
 	//index all entity
 	@RequestMapping("/admin/indexallsimpanan")
-	public String indexSimpanan(Model model, HttpServletRequest request)
+	public String indexSimpanan()
 	{
 		return "redirect:/allsimpanan";
 	}
@@ -168,24 +169,25 @@ public class AdminController
 		pinjamanService.deleteById(id);
 		return "redirect:/admin/index";
 	}
+	
 	//Edit form
 	@RequestMapping("/editsimpanan")
 	public String editSimpanan(@Valid Simpanan simpanan)
 	{
 		simpananService.edit(simpanan);
-		return "/admin/indexallsimpanan";
+		return "redirect:/allsimpanan";
 	}
 	@RequestMapping("/editpinjaman")
 	public String editPinjaman(@Valid Pinjaman pinjaman)
 	{
 		pinjamanService.edit(pinjaman);
-		return "/admin/indexallpinjaman";
+		return "redirect:/allpinjaman";
 	}
 	@RequestMapping("/editanggota")
 	public String editAnggota(@Valid Anggota anggota)
 	{
 		anggotaService.edit(anggota);
-		return "/admin/indexallanggota";
+		return "redirect:/allanggota";
 	}
 	
 }

@@ -7,24 +7,24 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-
 public class Simpanan {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
-	private Integer idAnggota;
+	private int id;
+	
+	private int idAnggota;
 	private String namaAnggota;
 	private String tglSimpanan;
 	private String tipeSimpanan;
-	private double simpanan;
+	private double simpanan = 0;
 	@Column(nullable = true)
 	private String ket;
 	
 	public Simpanan() {
 		super();
 	}
-	public Simpanan(Integer idAnggota, String namaAnggota, String tglSimpanan, String tipeSimpanan,
-			double simpanan, String ket) {
+	public Simpanan(int idAnggota, String namaAnggota, String tglSimpanan, String tipeSimpanan, double simpanan, String ket) 
+	{
 		super();
 		this.idAnggota = idAnggota;
 		this.namaAnggota = namaAnggota;
