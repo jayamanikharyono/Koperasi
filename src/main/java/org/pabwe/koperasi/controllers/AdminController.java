@@ -6,10 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.pabwe.koperasi.models.Anggota;
+import org.pabwe.koperasi.models.Angsuran;
 import org.pabwe.koperasi.models.Pinjaman;
 import org.pabwe.koperasi.models.Simpanan;
 import org.pabwe.koperasi.models.User;
 import org.pabwe.koperasi.services.AnggotaService;
+import org.pabwe.koperasi.services.AngsuranService;
 import org.pabwe.koperasi.services.PinjamanService;
 import org.pabwe.koperasi.services.SimpananService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,8 @@ public class AdminController
 	AnggotaService anggotaService;
 	@Autowired
 	SimpananService simpananService;
+	@Autowired
+	AngsuranService angsuranService;
 	
 	User userloggedin;
 	
@@ -75,6 +79,11 @@ public class AdminController
 	{
 		return "redirect:/allanggota";
 	}
+	@RequestMapping("/admin/indexallAngsuran")
+	public String indexAngsuran()
+	{
+		return "redirect:/allangsuran";
+	}
 	
 	
 	//redirect
@@ -101,6 +110,14 @@ public class AdminController
 		List<Simpanan> listSimpanan = simpananService.findAllSimpanan();
 		model.addAttribute("allsimpanan",listSimpanan);
 		return "/admin/allsimpanan";
+	}
+	@RequestMapping("allangsuran")
+	public String allAngsuran(Model model, HttpServletRequest request)
+	{
+		loginCheck(request);
+		List<Angsuran> listAngsuran = angsuranService.findAllAngsuran();
+		model.addAttribute("allangsuran", listAngsuran);
+		return "/admin/allangsuran";
 	}
 	
 	
@@ -169,6 +186,27 @@ public class AdminController
 		pinjamanService.deleteById(id);
 		return "redirect:/admin/index";
 	}
+	//Angsuran
+	@RequestMapping("admin/angsuran/{id}")
+	public String showAngsuran(@PathVariable Integer id, Model model)
+	{
+		model.addAttribute("angsuran",angsuranService.findById(id));
+		return "admin/angsuran/show";
+	}
+	
+	@RequestMapping("admin/angsuran/edit/{id}")
+	public String editAngsuran(@PathVariable Integer id, Model model)
+	{
+		model.addAttribute("angsuran",angsuranService.findById(id));
+		return "admin/angsuran/edit";
+	}
+	
+	@RequestMapping("admin/angsuran/delete/{id}")
+	public String deleteAngsuran(@PathVariable Integer id)
+	{
+		angsuranService.deleteById(id);
+		return "redirect:/admin/index";
+	}
 	
 	//Edit form
 	@RequestMapping("/editsimpanan")
@@ -188,6 +226,12 @@ public class AdminController
 	{
 		anggotaService.edit(anggota);
 		return "redirect:/allanggota";
+	}
+	@RequestMapping("/editangsuran")
+	public String editAnggota(@Valid Angsuran angsuran)
+	{
+		angsuranService.edit(angsuran);
+		return "redirect:/allangsuran";
 	}
 	
 }
