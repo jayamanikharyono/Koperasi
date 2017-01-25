@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layoutadmin :: site-head">
+<title>Koperasi Mandiri | Admin </title>
+</head>
+<body>
+<header th:replace="layoutadmin :: site-header" >
+</header>
+	  <div id="anggota">
+	    <h3>Petugas</h3>
+	    <div class="panel panel-default">
+	    	<div class="panel-heading">Daftar Petugas</div>
+	    	<div class="panel-body">
+			    <table class="table .table-striped">
+			    	<tr>
+			    		<th>ID</th>
+			    		<th>Nama</th>
+			    		<th>Alamat</th>
+			    		<th>Kota</th>
+			    		<th>Jenis Kelamin</th>
+			    		<th>Telepon</th>
+			    		<th>Aksi</th>
+			    	</tr>
+			    	<tr th:each="petugas : ${allpetugas}">
+			    		<td th:text="${petugas.id}"></td>
+			    		<td th:text="${petugas.nama}"></td>
+			    		<td th:text="${petugas.alamat}"></td>
+			    		<td th:text="${petugas.kota}"></td>
+			    		<td th:text="${petugas.jK}"></td>
+			    		<td th:text="${petugas.noHP}"></td>
+			    		<td>
+			    			<a th:href="@{'/admin/petugas/' + ${petugas.id}}">View</a>
+			    			<a th:href="@{'/admin/petugas/edit/' + ${petugas.id}}">Edit</a>
+			    			<a th:href="@{'/admin/petugas/delete/'+ ${petugas.id}}">Delete</a>
+			    		</td>
+			    	</tr>
+			    </table>
+			</div>
+		</div>
+	  </div>
+<footer th:replace="layoutadmin :: site-footer" ></footer>
+</body>
+</html>

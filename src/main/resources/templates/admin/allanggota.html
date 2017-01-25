@@ -8,39 +8,43 @@
 </header>
 	  <div id="anggota">
 	    <h3>Anggota</h3>
-	    <p>Daftar Anggota.</p>
-	    <table class="table .table-striped">
-	    	<tr>
-	    		<th>ID</th>
-	    		<th>Id Ktp</th>
-	    		<th>Nama</th>
-	    		<th>Jk</th>
-	    		<th>Alamat</th>
-	    		<th>Kota</th>
-	    		<th>Telepon</th>
-	    		<th>Banyak Simpanan Wajib</th>
-	    		<th>Banyak Simpanan Sukarela</th>
-	    		<th>Banyak Pinjaman</th>
-	    		<th>Aksi</th>
-	    	</tr>
-	    	<tr th:each="anggota : ${allanggota}">
-	    		<td th:text="${anggota.id}"></td>
-	    		<td th:text="${anggota.idKtp}"></td>
-	    		<td th:text="${anggota.nama}"></td>
-	    		<td th:text="${anggota.jK}"></td>
-	    		<td th:text="${anggota.alamat}"></td>
-	    		<td th:text="${anggota.kota}"></td>
-	    		<td th:text="${anggota.telepon}"></td>
-	    		<td th:text="${anggota.banyakSimpananWajib}"></td>
-	    		<td th:text="${anggota.banyakSimpananSukarela}"></td>
-	    		<td th:text="${anggota.banyakPinjaman}"></td>
-	    		<td>
-	    			<a th:href="@{'/admin/anggota/' + ${anggota.id}}">View</a>
-	    			<a th:href="@{'/admin/anggota/edit/' + ${anggota.id}}">Edit</a>
-	    			<a th:href="@{'/admin/anggota/delete/'+ ${anggota.id}}">Delete</a>
-	    		</td>
-	    	</tr>
-	    </table>
+	    <div class="panel panel-default">
+	    	<div class="panel-heading">Daftar Anggota</div>
+	    	<div class="panel-body">
+		    	<table class="table .table-striped">
+			    	<tr>
+			    		<th>ID</th>
+			    		<th>Id Ktp</th>
+			    		<th>Nama</th>
+			    		<th>Jk</th>
+			    		<th>Alamat</th>
+			    		<th>Kota</th>
+			    		<th>Telepon</th>
+			    		<th>Banyak Simpanan Wajib</th>
+			    		<th>Banyak Simpanan Sukarela</th>
+			    		<th>Banyak Pinjaman</th>
+			    		<th>Aksi</th>
+			    	</tr>
+			    	<tr th:each="anggota : ${allanggota}">
+			    		<td th:text="${anggota.id}"></td>
+			    		<td th:text="${anggota.idKtp}"></td>
+			    		<td th:text="${anggota.nama}"></td>
+			    		<td th:text="${anggota.jK}"></td>
+			    		<td th:text="${anggota.alamat}"></td>
+			    		<td th:text="${anggota.kota}"></td>
+			    		<td th:text="${anggota.telepon}"></td>
+			    		<td th:text="${anggota.banyakSimpananWajib}"></td>
+			    		<td th:text="${anggota.banyakSimpananSukarela}"></td>
+			    		<td th:text="${anggota.banyakPinjaman}"></td>
+			    		<td>
+			    			<a th:href="@{'/admin/anggota/' + ${anggota.id}}">View</a>
+			    			<a th:href="@{'/admin/anggota/edit/' + ${anggota.id}}">Edit</a>
+			    			<a th:href="@{'/admin/anggota/delete/'+ ${anggota.id}}">Delete</a>
+			    		</td>
+			    	</tr>
+		    	</table>
+	    	</div>
+	    </div>
 	  </div>
 <footer th:replace="layoutadmin :: site-footer" ></footer>
 </body>

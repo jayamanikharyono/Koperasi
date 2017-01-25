@@ -8,31 +8,35 @@
 </header>
 	  <div id="pinjaman">
 	    <h3>Angsuran</h3>
-	    <p>Daftar Angsuran</p>
-	    <table class="table .table-striped">
-	    	<tr>
-	    		<th>Id</th>
-	    		<th>Id Pinjaman</th>
-	    		<th>Tanggal Jatuh Tempo</th>
-	    		<th>Tanggal Bayar</th>
-	    		<th>Jumlah</th>
-	    		<th>Keterangan</th>
-	    		<th>Pilihan</th>
-	    	</tr>
-	    	<tr th:each="angsuran : ${allangsuran}">
-	    		<td th:text="${angsuran.id}"></td>
-	    		<td th:text="${angsuran.idPinjaman}"></td>
-	    		<td th:text="${angsuran.tanggalJatuhTempo}"></td>
-	    		<td th:text="${angsuran.tanggalBayar}"></td>
-	    		<td th:text="${angsuran.jumlah}"></td>
-	    		<td th:text="${angsuran.keterangan}"></td>
-	    		<td>
-	    			<a th:href="@{'/admin/angsuran/' + ${angsuran.id}}">View</a>
-	    			<a th:href="@{'/admin/angsuran/edit/' + ${angsuran.id}}">Edit</a>
-	    			<a th:href="@{'/admin/angsuran/delete/'+ ${angsuran.id}}">Delete</a>
-	    		</td>
-	    	</tr>
-	    </table>
+	    <div class="panel panel-default">
+	    	<div class="panel-heading">Daftar Angsuran</div>
+	    	<div class="panel-body">
+			    <table class="table .table-striped">
+			    	<tr>
+			    		<th>Id</th>
+			    		<th>Id Pinjaman</th>
+			    		<th>Tanggal Jatuh Tempo</th>
+			    		<th>Tanggal Bayar</th>
+			    		<th>Jumlah</th>
+			    		<th>Keterangan</th>
+			    		<th>Pilihan</th>
+			    	</tr>
+			    	<tr th:each="angsuran : ${allangsuran}">
+			    		<td th:text="${angsuran.id}"></td>
+			    		<td th:text="${angsuran.idPinjaman}"></td>
+			    		<td th:text="${angsuran.tanggalJatuhTempo}"></td>
+			    		<td th:text="${angsuran.tanggalBayar}"></td>
+			    		<td th:text="${angsuran.jumlah}"></td>
+			    		<td th:text="${angsuran.keterangan}"></td>
+			    		<td>
+			    			<a th:href="@{'/admin/angsuran/' + ${angsuran.id}}">View</a>
+			    			<a th:href="@{'/admin/angsuran/edit/' + ${angsuran.id}}">Edit</a>
+			    			<a th:href="@{'/admin/angsuran/delete/'+ ${angsuran.id}}">Delete</a>
+			    		</td>
+			    	</tr>
+			    </table>
+			</div>
+		</div>
 	  </div>
 <footer th:replace="layoutadmin :: site-footer" ></footer>
 </body>

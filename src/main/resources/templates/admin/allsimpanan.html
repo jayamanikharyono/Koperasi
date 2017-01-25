@@ -8,33 +8,37 @@
 </header>
 	  <div id="simpanan" >
 	    <h3>Simpanan</h3>
-	    <p>Daftar Simpanan</p>
-	    <table class="table .table-striped">
-	    	<tr>
-	    		<th>ID </th>
-	    		<th>ID Anggota</th>
-	    		<th>Nama Anggota</th>
-	    		<th>Tanggal Simpanan</th>
-	    		<th>Tipe Simpanan</th>
-	    		<th>Simpanan</th>
-	    		<th>Keterangan</th>
-	    		<th>Pilihan</th>
-	    	</tr>
-	    	<tr th:each="simpanan : ${allsimpanan}">
-	    		<td th:text="${simpanan.id}"></td>
-	    		<td th:text="${simpanan.idAnggota}"></td>
-	    		<td th:text="${simpanan.namaAnggota}"></td>
-	    		<td th:text="${simpanan.tglSimpanan}"></td>
-	    		<td th:text="${simpanan.tipeSimpanan}"></td>
-	    		<td th:text="${simpanan.simpanan}"></td>
-	    		<td th:text="${simpanan.ket}"></td>
-	    		<td>
-	    			<a th:href="@{'/admin/simpanan/' + ${simpanan.id}}">View</a>
-	    			<a th:href="@{'/admin/simpanan/edit/' + ${simpanan.id}}">Edit</a>
-	    			<a th:href="@{'/admin/simpanan/delete/'+ ${simpanan.id}}">Delete</a>
-	    		</td>
-	    	</tr>
-	    </table>
+	    <div class="panel panel-default">
+	    	<div class="panel-heading">Daftar Simpanan</div>
+	    	<div class="panel-body">
+		    <table class="table .table-striped">
+		    	<tr>
+		    		<th>ID </th>
+		    		<th>ID Anggota</th>
+		    		<th>Nama Anggota</th>
+		    		<th>Tanggal Simpanan</th>
+		    		<th>Tipe Simpanan</th>
+		    		<th>Simpanan</th>
+		    		<th>Keterangan</th>
+		    		<th>Pilihan</th>
+		    	</tr>
+		    	<tr th:each="simpanan : ${allsimpanan}">
+		    		<td th:text="${simpanan.id}"></td>
+		    		<td th:text="${simpanan.idAnggota}"></td>
+		    		<td th:text="${simpanan.namaAnggota}"></td>
+		    		<td th:text="${simpanan.tglSimpanan}"></td>
+		    		<td th:text="${simpanan.tipeSimpanan}"></td>
+		    		<td th:text="${simpanan.simpanan}"></td>
+		    		<td th:text="${simpanan.ket}"></td>
+		    		<td>
+		    			<a th:href="@{'/admin/simpanan/' + ${simpanan.id}}">View</a>
+		    			<a th:href="@{'/admin/simpanan/edit/' + ${simpanan.id}}">Edit</a>
+		    			<a th:href="@{'/admin/simpanan/delete/'+ ${simpanan.id}}">Delete</a>
+		    		</td>
+		    	</tr>
+		    </table>
+		 	</div>
+		</div>
 	  </div>
 
 <footer th:replace="layoutadmin :: site-footer" ></footer>

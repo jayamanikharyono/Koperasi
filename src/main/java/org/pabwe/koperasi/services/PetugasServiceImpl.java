@@ -8,11 +8,13 @@ import java.util.List;
 import org.pabwe.koperasi.models.Petugas;
 import org.pabwe.koperasi.repositories.PetugasRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Jayuk
  *
  */
+@Service
 public class PetugasServiceImpl implements PetugasService {
 
 	/* (non-Javadoc)

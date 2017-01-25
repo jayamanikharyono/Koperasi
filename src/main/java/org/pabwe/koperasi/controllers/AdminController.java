@@ -7,11 +7,13 @@ import javax.validation.Valid;
 
 import org.pabwe.koperasi.models.Anggota;
 import org.pabwe.koperasi.models.Angsuran;
+import org.pabwe.koperasi.models.Petugas;
 import org.pabwe.koperasi.models.Pinjaman;
 import org.pabwe.koperasi.models.Simpanan;
 import org.pabwe.koperasi.models.User;
 import org.pabwe.koperasi.services.AnggotaService;
 import org.pabwe.koperasi.services.AngsuranService;
+import org.pabwe.koperasi.services.PetugasService;
 import org.pabwe.koperasi.services.PinjamanService;
 import org.pabwe.koperasi.services.SimpananService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,8 @@ public class AdminController
 	SimpananService simpananService;
 	@Autowired
 	AngsuranService angsuranService;
+	@Autowired
+	PetugasService petugasService;
 	
 	User userloggedin;
 	
@@ -51,6 +55,11 @@ public class AdminController
 		model.addAttribute("loggedin",userloggedin.getFullName());
 		System.out.println("Admin");
 		return "/admin/adminIndex";
+	}
+	@RequestMapping("admin/dashboard")
+	public String adminDashboard()
+	{
+		return "redirect:/admin/index";
 	}
 	
 	@RequestMapping("admin/logout")
@@ -79,10 +88,15 @@ public class AdminController
 	{
 		return "redirect:/allanggota";
 	}
-	@RequestMapping("/admin/indexallAngsuran")
+	@RequestMapping("/admin/indexallangsuran")
 	public String indexAngsuran()
 	{
 		return "redirect:/allangsuran";
+	}
+	@RequestMapping("/admin/indexallpetugas")
+	public String indexPetugas()
+	{
+		return "redirect:/allpetugas";
 	}
 	
 	
@@ -118,6 +132,14 @@ public class AdminController
 		List<Angsuran> listAngsuran = angsuranService.findAllAngsuran();
 		model.addAttribute("allangsuran", listAngsuran);
 		return "/admin/allangsuran";
+	}
+	@RequestMapping("allpetugas")
+	public String allPetugas(Model model, HttpServletRequest request)
+	{
+		loginCheck(request);
+		List<Petugas> listPetugas = petugasService.findAllPetugas();
+		model.addAttribute("allpetugas", listPetugas);
+		return "/admin/allpetugas";
 	}
 	
 	
@@ -207,6 +229,28 @@ public class AdminController
 		angsuranService.deleteById(id);
 		return "redirect:/admin/index";
 	}
+	//Petugas
+	@RequestMapping("admin/petugas/{id}")
+	public String showPetugas(@PathVariable Integer id, Model model)
+	{
+		model.addAttribute("petugas",petugasService.findById(id));
+		return "admin/petugas/show";
+	}
+	
+	@RequestMapping("admin/petugas/edit/{id}")
+	public String editPetugas(@PathVariable Integer id, Model model)
+	{
+		model.addAttribute("petugas",petugasService.findById(id));
+		return "admin/petugas/edit";
+	}
+	
+	@RequestMapping("admin/petugas/delete/{id}")
+	public String deletePetugas(@PathVariable Integer id)
+	{
+		petugasService.deleteById(id);
+		return "redirect:/admin/index";
+	}
+	
 	
 	//Edit form
 	@RequestMapping("/editsimpanan")
@@ -232,6 +276,12 @@ public class AdminController
 	{
 		angsuranService.edit(angsuran);
 		return "redirect:/allangsuran";
+	}
+	@RequestMapping("/editpetugas")
+	public String editPetugas(@Valid Petugas petugas)
+	{
+		petugasService.edit(petugas);
+		return "redirect:/allpetugas";
 	}
 	
 }
