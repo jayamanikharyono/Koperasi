@@ -1,8 +1,108 @@
 package org.pabwe.koperasi.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.pabwe.koperasi.models.Anggota;
+import org.pabwe.koperasi.models.Angsuran;
+import org.pabwe.koperasi.models.Pinjaman;
+import org.pabwe.koperasi.models.Simpanan;
+import org.pabwe.koperasi.models.User;
+import org.pabwe.koperasi.services.AnggotaService;
+import org.pabwe.koperasi.services.AngsuranService;
+import org.pabwe.koperasi.services.PinjamanService;
+import org.pabwe.koperasi.services.SimpananService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 
 @Controller
 public class UserController {
+	
+	User userloggedin;
+	@Autowired
+	AngsuranService angsuranService;
+	@Autowired
+	PinjamanService pinjamanService;
+	@Autowired
+	AnggotaService anggotaService;
+	@Autowired
+	SimpananService simpananService;
+	
+	public String loginCheck(HttpServletRequest request)
+	{
+		if(((User) request.getSession().getAttribute("userLogin")).getRole().equalsIgnoreCase("user"))
+		{
+			return null;
+		}
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/user/index")
+	public String userIndex(Model model, HttpServletRequest request)
+	{
+		loginCheck(request);
+		userloggedin = (User) request.getSession().getAttribute("userLogin");
+		model.addAttribute("loggedin",userloggedin.getFullName());
+		System.out.println("User");
+		return "/user/index";
+	}
+	
+	@RequestMapping("user/dashboard")
+	public String adminDashboard()
+	{
+		return "redirect:/user/index";
+	}
+	
+	@RequestMapping("user/logout")
+	public String logout(HttpServletRequest request)
+	{
+		userloggedin = null;
+		request.getSession().removeAttribute("userLogin");
+		return "redirect:/.";
+	}
+	
+	@RequestMapping("/user/all")
+	public String indexPinjaman()
+	{
+		return "redirect:/user/indexall";
+	}
+	
+	@RequestMapping("/user/indexall")
+	public String indexuserall(Model model, HttpServletRequest request)
+	{
+		loginCheck(request);
+		List<Angsuran> listAngsuranAnggota = new ArrayList<>();
+		List<Pinjaman> listPinjamanAnggota =  new ArrayList<>();
+		List<Simpanan> listSimpananAnggota =  new ArrayList<>();
+		List<Pinjaman> listPinjaman =  pinjamanService.findAllPinjaman();
+		List<Angsuran> listAngsuran = angsuranService.findAllAngsuran();
+		List<Simpanan> listSimpanan =  simpananService.findAllSimpanan();
+		Anggota anggota = anggotaService.findByName(userloggedin.getFullName());
 
+		for(Simpanan simpanan : listSimpanan)
+		{
+			if(simpanan.getIdAnggota() == anggota.getId())
+				listSimpananAnggota.add(simpanan);
+		}
+		for(int i =0;i<listPinjamanAnggota.size();i++)
+		{
+			for(int j=0;j<listAngsuran.size();j++)
+			{
+				if(listPinjaman.get(i).getIdAnggota() == anggota.getId())
+					listPinjamanAnggota.add(listPinjaman.get(i));
+				if(listPinjamanAnggota.get(i).getId()== listAngsuran.get(j).getIdPinjaman())
+					listAngsuranAnggota.add(listAngsuran.get(j));
+			}
+		}
+		model.addAttribute("angsuranuser", listAngsuranAnggota);
+		model.addAttribute("simpananuser", listSimpananAnggota);
+		model.addAttribute("pinjamanuser", listPinjamanAnggota);
+		return "user/indexall";
+	}
+	
 }

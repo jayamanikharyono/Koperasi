@@ -39,4 +39,15 @@ public class AnggotaServiceImpl implements AnggotaService {
 
 	}
 
+	@Override
+	public Anggota findByName(String name) {
+		List<Anggota> listAnggota =  anggotaRepository.findAll();
+		for(Anggota anggota : listAnggota)
+		{
+			if(anggota.getNama().equalsIgnoreCase(name))
+				return anggota;
+		}
+		return null;
+	}
+
 }

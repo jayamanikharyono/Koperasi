@@ -40,11 +40,11 @@ public class AdminController
 	
 	public String loginCheck(HttpServletRequest request)
 	{
-		if(((User) request.getSession().getAttribute("userLogin")).getFullName() == null)
+		if(((User) request.getSession().getAttribute("userLogin")).getRole().equalsIgnoreCase("admin"))
 		{
-			return "redirect:/";
+			return null;
 		}
-		return null;
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/admin/index")
@@ -67,7 +67,7 @@ public class AdminController
 	{
 		userloggedin = null;
 		request.getSession().removeAttribute("userLogin");
-		return "redirect:/";
+		return "redirect:/.";
 	}
 	
 	@RequestMapping("/admin/insert")
@@ -126,13 +126,14 @@ public class AdminController
 		return "/admin/allpinjaman";
 	}
 	@RequestMapping("allsimpanan")
-	public String allSimpanan(Model model, HttpServletRequest request)
+	public String allSimpanan(Model model,HttpServletRequest request)
 	{
 		loginCheck(request);
 		List<Simpanan> listSimpanan = simpananService.findAllSimpanan();
 		model.addAttribute("allsimpanan",listSimpanan);
 		return "/admin/allsimpanan";
 	}
+	
 	@RequestMapping("allangsuran")
 	public String allAngsuran(Model model, HttpServletRequest request)
 	{
@@ -264,7 +265,7 @@ public class AdminController
 	@RequestMapping("/editsimpanan")
 	public String editSimpanan(@Valid Simpanan simpanan)
 	{
-		simpananService.edit(simpanan);
+		simpananService.save(simpanan);
 		return "redirect:/allsimpanan";
 	}
 	@RequestMapping("/editpinjaman")

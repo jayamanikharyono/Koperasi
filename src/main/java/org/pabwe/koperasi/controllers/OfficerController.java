@@ -27,6 +27,12 @@ public class OfficerController {
 	@Autowired
 	UserService userService;
 	
+	@RequestMapping("/officer/index")
+	public String petugasIndex()
+	{
+		return "/officer/index";
+	}
+	
 	@RequestMapping("/officer/simpan")
 	public String simpanan(Model model){
 		DateFormat df = new SimpleDateFormat("dd-mm-yyyy");

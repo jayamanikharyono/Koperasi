@@ -3,8 +3,8 @@ package org.pabwe.koperasi.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 import org.pabwe.koperasi.models.User;
+import org.pabwe.koperasi.services.AnggotaService;
 import org.pabwe.koperasi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController 
 {
 	@Autowired
+	AnggotaService anggotaService;
+	@Autowired
 	UserService userService;
 	User userloggedin;
+	
 	
 	@RequestMapping("/")
 	public String index()
@@ -59,14 +62,5 @@ public class HomeController
 		}
 		return null;
 	}
-	@RequestMapping("/user/index")
-	public String userIndex()
-	{
-		return "/user/index";
-	}
-	@RequestMapping("/officer/index")
-	public String petugasIndex()
-	{
-		return "/officer/index";
-	}
+	
 }

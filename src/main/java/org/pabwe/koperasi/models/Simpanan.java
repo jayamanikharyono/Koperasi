@@ -1,5 +1,6 @@
 package org.pabwe.koperasi.models;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Simpanan {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
@@ -17,8 +19,10 @@ public class Simpanan {
 	private String tglSimpanan;
 	private String tipeSimpanan;
 	private double simpanan = 0;
+	
 	@Column(nullable = true)
 	private String ket;
+	
 	
 	public Simpanan() {
 		super();
@@ -75,7 +79,5 @@ public class Simpanan {
 	public void setKet(String ket) {
 		this.ket = ket;
 	}
-	
-
 	
 }

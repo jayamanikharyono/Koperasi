@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout :: site-head">
-<title>Welcome to Spring Ticket</title>
+<head th:replace="layoutuser :: site-head">
+<title>Koperasi Mandiri | User</title>
 </head>
 <body>
-<header th:replace="layout :: site-header" >
+<header th:replace="layoutuser :: site-header" >
 </header>
 	<div class="jumbotron">
 	  <h1>User</h1>
 	  <p>Koperasi Mandiri</p>
+	  <h2>Welcome  <span class="label label-default" th:text="${loggedin}"></span></h2>
+	  
 	</div>
-<footer th:replace="layout :: site-footer" ></footer>
+<footer th:replace="layoutuser :: site-footer" ></footer>
 </body>
 </html>

@@ -21,6 +21,7 @@ public class Anggota {
 	private double banyakSimpananSukarela = 0;
 	private double banyakPinjaman = 0;
 	
+	
 	public Anggota() {
 		super();
 	}
@@ -103,4 +104,5 @@ public class Anggota {
 	public void setBanyakPinjaman(double banyakPinjaman) {
 		this.banyakPinjaman = banyakPinjaman;
 	}
+	
 }

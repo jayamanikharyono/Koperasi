@@ -11,4 +11,5 @@ public interface AnggotaService {
 	Anggota findById(int idAnggota);
 	Anggota edit(Anggota anggota);
 	void deleteById(int idAnggota);
+	Anggota findByName(String name);
 }
