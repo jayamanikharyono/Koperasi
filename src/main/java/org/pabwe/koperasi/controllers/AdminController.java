@@ -67,7 +67,7 @@ public class AdminController
 	{
 		userloggedin = null;
 		request.getSession().removeAttribute("userLogin");
-		return "redirect:/.";
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/admin/insert")

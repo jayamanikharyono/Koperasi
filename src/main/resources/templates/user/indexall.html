@@ -78,7 +78,6 @@
 		    		<th>Tipe Simpanan</th>
 		    		<th>Simpanan</th>
 		    		<th>Keterangan</th>
-		    		<th>Pilihan</th>
 		    	</tr>
 		    	<tr th:each="simpanan : ${simpananuser}">
 		    		<td th:text="${simpanan.id}"></td>
@@ -88,11 +87,6 @@
 		    		<td th:text="${simpanan.tipeSimpanan}"></td>
 		    		<td th:text="${simpanan.simpanan}"></td>
 		    		<td th:text="${simpanan.ket}"></td>
-		    		<td>
-		    			<a th:href="@{'/admin/simpanan/' + ${simpanan.id}}"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
-		    			<a th:href="@{'/admin/simpanan/edit/' + ${simpanan.id}}"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span></a>
-		    			<a th:href="@{'/admin/simpanan/delete/'+ ${simpanan.id}}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
-		    		</td>
 		    	</tr>
 		    </table>
 		 	</div>

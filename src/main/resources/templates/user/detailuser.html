@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layoutuser :: site-head">
+<title th:text="'Koperasi Mandiri | ' + ${user.fullName}"></title>
+</head>
+<body>
+<header th:replace="layoutuser :: site-header" >
+</header>
+	<h3>Detail Anggota</h3>
+	    <div class="container">
+	    <div class="panel panel-default">
+	    	<div class="panel-heading">Detail Anggota</div>
+		    	<div class="panel-body">
+			    	<form class="form-horizontal">
+		                <div class="form-group">
+		                    <label class="col-sm-2 control-label">Id :</label>
+		                    <div class="col-sm-10">
+		                        <p class="form-control-static" th:text="${anggota.id}">Id Anggota</p></div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-sm-2 control-label">Name :</label>
+		                    <div class="col-sm-10">
+		                        <p class="form-control-static" th:text="${anggota.nama}">Nama Anggota</p>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-sm-2 control-label">Id KTP :</label>
+		                    <div class="col-sm-10">
+		                        <p class="form-control-static" th:text="${anggota.idKtp}">Id Ktp</p>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-sm-2 control-label">Jenis Kelamin :</label>
+		                    <div class="col-sm-10">
+		                        <p class="form-control-static" th:text="${anggota.jK}">Jenis Kelamin</p>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-sm-2 control-label">Alamat :</label>
+		                    <div class="col-sm-10">
+		                        <p class="form-control-static" th:text="${anggota.alamat}">Alamat</p>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-sm-2 control-label">Kota :</label>
+		                    <div class="col-sm-10">
+		                        <p class="form-control-static" th:text="${anggota.kota}">Kota</p>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-sm-2 control-label">Telepon :</label>
+		                    <div class="col-sm-10">
+		                        <p class="form-control-static" th:text="${anggota.telepon}">Telepon</p>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-sm-2 control-label">Banyak Simpanan Wajib :</label>
+		                    <div class="col-sm-10">
+		                        <p class="form-control-static" th:text="${anggota.banyakSimpananWajib}">Banyak Simpanan Wajib</p>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-sm-2 control-label">Banyak Simpanan Sukarela :</label>
+		                    <div class="col-sm-10">
+		                        <p class="form-control-static" th:text="${anggota.banyakSimpananSukarela}">Banyak Simpanan Wajib</p>
+		                    </div>
+		                </div>
+		                <div class="form-group">
+		                    <label class="col-sm-2 control-label">Banyak Pinjaman :</label>
+		                    <div class="col-sm-10">
+		                        <p class="form-control-static" th:text="${anggota.banyakPinjaman}">Banyak Pinjaman</p>
+		                    </div>
+		                </div>
+		            </form>
+	            </div>
+            </div>
+            <div class="panel panel-default">
+	    		<div class="panel-heading">Detail Anggota</div>
+		    		<div class="panel-body">
+            			<form th:action="@{/editpassword}" method="post">
+            				<div class="form-group">
+				    			<label class="col-sm-5 control-label">Password : </label>
+				    			<div class="col-sm-10">
+				    				<input type="password" class="form-control" name="password" id="password" />
+				    			</div>
+				    		</div>
+			                <div class="form-group">
+				    			<label class="col-sm-5 control-label">Retype Password : </label>
+				    			<div class="col-sm-10">
+				    				<input type="password" class="form-control" name="retypepassword" id="retypepassword" />
+				    			</div>
+				    		</div>
+			                <input type="submit" value="Perbahrui"/>
+            			</form>
+            		</div>
+            </div>
+	    </div>
+
+<footer th:replace="layoutuser :: site-footer" ></footer>
+</body>
+</html>

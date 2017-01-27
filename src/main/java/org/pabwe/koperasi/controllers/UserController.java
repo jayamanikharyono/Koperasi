@@ -14,6 +14,7 @@ import org.pabwe.koperasi.services.AnggotaService;
 import org.pabwe.koperasi.services.AngsuranService;
 import org.pabwe.koperasi.services.PinjamanService;
 import org.pabwe.koperasi.services.SimpananService;
+import org.pabwe.koperasi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,6 +33,8 @@ public class UserController {
 	AnggotaService anggotaService;
 	@Autowired
 	SimpananService simpananService;
+	@Autowired
+	UserService userService;
 	
 	public String loginCheck(HttpServletRequest request)
 	{
@@ -50,6 +53,14 @@ public class UserController {
 		model.addAttribute("loggedin",userloggedin.getFullName());
 		System.out.println("User");
 		return "/user/index";
+	}
+	@RequestMapping("/user/detail")
+	public String userDetail(Model model, HttpServletRequest request)
+	{
+		Anggota anggota = anggotaService.findByName(userloggedin.getFullName());
+		model.addAttribute("anggota", anggota);
+		model.addAttribute("user", userloggedin);
+		return "user/detailuser";
 	}
 	
 	@RequestMapping("user/dashboard")
@@ -79,22 +90,22 @@ public class UserController {
 		List<Angsuran> listAngsuranAnggota = new ArrayList<>();
 		List<Pinjaman> listPinjamanAnggota =  new ArrayList<>();
 		List<Simpanan> listSimpananAnggota =  new ArrayList<>();
-		List<Pinjaman> listPinjaman =  pinjamanService.findAllPinjaman();
+		List<Pinjaman> listPinjaman = pinjamanService.findAllPinjaman();
 		List<Angsuran> listAngsuran = angsuranService.findAllAngsuran();
-		List<Simpanan> listSimpanan =  simpananService.findAllSimpanan();
+		List<Simpanan> listSimpanan = simpananService.findAllSimpanan();
 		Anggota anggota = anggotaService.findByName(userloggedin.getFullName());
-
+		System.out.println(anggota.getNama());
 		for(Simpanan simpanan : listSimpanan)
 		{
 			if(simpanan.getIdAnggota() == anggota.getId())
 				listSimpananAnggota.add(simpanan);
 		}
-		for(int i =0;i<listPinjamanAnggota.size();i++)
+		for(int i =0;i<listPinjaman.size();i++)
 		{
+			if(listPinjaman.get(i).getIdAnggota() == anggota.getId())
+				listPinjamanAnggota.add(listPinjaman.get(i));
 			for(int j=0;j<listAngsuran.size();j++)
 			{
-				if(listPinjaman.get(i).getIdAnggota() == anggota.getId())
-					listPinjamanAnggota.add(listPinjaman.get(i));
 				if(listPinjamanAnggota.get(i).getId()== listAngsuran.get(j).getIdPinjaman())
 					listAngsuranAnggota.add(listAngsuran.get(j));
 			}
@@ -103,6 +114,19 @@ public class UserController {
 		model.addAttribute("simpananuser", listSimpananAnggota);
 		model.addAttribute("pinjamanuser", listPinjamanAnggota);
 		return "user/indexall";
+	}
+	@RequestMapping("/editpassword")
+	public String perbaharuiPassword(HttpServletRequest request)
+	{
+		String password = request.getParameter("retypepassword");
+		String confPassword = request.getParameter("retypepassword");
+		if(password.equals(confPassword))
+		{
+			userloggedin.setPassword(confPassword);
+			userService.edit(userloggedin);
+			return "/user/index";
+		}
+		return "/user/detail";
 	}
 	
 }
