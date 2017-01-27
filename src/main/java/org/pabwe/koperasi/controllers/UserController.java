@@ -108,6 +108,7 @@ public class UserController {
 			{
 				if(listPinjamanAnggota.get(i).getId()== listAngsuran.get(j).getIdPinjaman())
 					listAngsuranAnggota.add(listAngsuran.get(j));
+				
 			}
 		}
 		model.addAttribute("angsuranuser", listAngsuranAnggota);

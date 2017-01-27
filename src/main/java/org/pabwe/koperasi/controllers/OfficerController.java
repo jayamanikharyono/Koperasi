@@ -39,6 +39,7 @@ public class OfficerController {
 		Date dateobj = new Date();
 		model.addAttribute("tanggal", df.format(dateobj));
 		return "officer/formSimpanan";
+		
 	}
 	
 	@RequestMapping("/officer/formanggota")

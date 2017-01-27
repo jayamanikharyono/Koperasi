@@ -62,6 +62,7 @@ public class AdminController
 		return "redirect:/admin/index";
 	}
 	
+	
 	@RequestMapping("admin/logout")
 	public String logout(HttpServletRequest request)
 	{
