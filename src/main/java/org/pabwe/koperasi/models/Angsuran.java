@@ -13,11 +13,13 @@ public class Angsuran {
 	private int id;
 	private int idPinjaman;
 	private String tanggalJatuhTempo;
+	@Column(nullable = true)
 	private String tanggalBayar;
+	@Column(nullable = true)
 	private double jumlah;
-	
 	@Column(nullable = true)
 	private String keterangan;
+	
 	public Angsuran(int idPinjaman, String tanggalJatuhTempo, String tanggalBayar, double jumlah,
 			String keterangan) {
 		super();
@@ -27,6 +29,13 @@ public class Angsuran {
 		this.jumlah = jumlah;
 		this.keterangan = keterangan;
 	}
+	
+	public Angsuran(int idPinjaman, String tanggalJatuhTempo) {
+		super();
+		this.idPinjaman = idPinjaman;
+		this.tanggalJatuhTempo = tanggalJatuhTempo;
+	}
+
 	public Angsuran() {
 		super();
 	}

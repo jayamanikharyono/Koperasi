@@ -1,15 +1,21 @@
 package org.pabwe.koperasi.controllers;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.pabwe.koperasi.models.Anggota;
+import org.pabwe.koperasi.models.Angsuran;
+import org.pabwe.koperasi.models.Pinjaman;
 import org.pabwe.koperasi.models.Simpanan;
 import org.pabwe.koperasi.models.User;
 import org.pabwe.koperasi.services.AnggotaService;
+import org.pabwe.koperasi.services.AngsuranService;
+import org.pabwe.koperasi.services.PinjamanService;
 import org.pabwe.koperasi.services.SimpananService;
 import org.pabwe.koperasi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,17 +31,21 @@ public class OfficerController {
 	@Autowired
 	SimpananService simpananService;
 	@Autowired
+	PinjamanService pinjamanService;
+	@Autowired
+	AngsuranService angsuranService;
+	@Autowired
 	UserService userService;
 	
 	@RequestMapping("/officer/index")
 	public String petugasIndex()
 	{
-		return "/officer/index";
+		return "officer/index";
 	}
 	
 	@RequestMapping("/officer/simpan")
 	public String simpanan(Model model){
-		DateFormat df = new SimpleDateFormat("dd-mm-yyyy");
+		DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 		Date dateobj = new Date();
 		model.addAttribute("tanggal", df.format(dateobj));
 		return "officer/formSimpanan";
@@ -48,7 +58,10 @@ public class OfficerController {
 	}
 	
 	@RequestMapping("/officer/pinjaman")
-	public String showFormPinjaman(){
+	public String showFormPinjaman(Model model){
+		DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+		Date dateobj = new Date();
+		model.addAttribute("tanggal", df.format(dateobj));
 		return "officer/formpinjaman";
 	}
 	
@@ -94,6 +107,38 @@ public class OfficerController {
 		userService.save(user);
 		Anggota anggota = new Anggota(nama, idKTP, jenisKelamin, alamat, kota, telepon);
 		anggotaService.save(anggota);
+		return "officer/index";
+	}
+	
+	@RequestMapping(value = "officer/simpanPinjaman", method = RequestMethod.POST)
+	public String savePinjaman(Model model, HttpServletRequest request) throws ParseException{
+		String tanggalPinjaman = request.getParameter("tanggalPinjaman");
+		int idAnggota = Integer.parseInt(request.getParameter("idAnggota"));
+		String namaAnggota = anggotaService.findById(idAnggota).getNama();
+		double jumlahPinjaman = Double.parseDouble(request.getParameter("jumlahPinjaman"));
+		int waktu = Integer.parseInt(request.getParameter("waktu"));
+		double angsuranPokok = Double.parseDouble(request.getParameter("angsuranPokok"));
+		String status = "Belum Lunas";
+		String ket = request.getParameter("ket");
+		double angsuranTotal = angsuranPokok * waktu;
+		
+		Pinjaman pinjaman = new Pinjaman(idAnggota, namaAnggota, jumlahPinjaman, tanggalPinjaman, waktu, angsuranPokok, status, ket, angsuranTotal);
+		int idPinjaman = pinjamanService.saveGetId(pinjaman);
+		
+		Anggota anggota = anggotaService.findById(idAnggota);
+		anggota.setBanyakPinjaman(anggota.getBanyakPinjaman() + jumlahPinjaman);
+		anggotaService.save(anggota);
+		
+		DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(df.parse(tanggalPinjaman));
+		for(int i=1;i<=waktu;i++){
+			cal.add(Calendar.DATE, 30);
+			String tanggalJatuhTempo = df.format(cal.getTime());
+			Angsuran angsuran = new Angsuran(idPinjaman, tanggalJatuhTempo);
+			angsuranService.save(angsuran);
+		}
+		
 		return "officer/index";
 	}
 }

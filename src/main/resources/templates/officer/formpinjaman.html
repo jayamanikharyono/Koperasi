@@ -6,21 +6,21 @@
 </head>
 <body>
 	<h1>Pinjaman</h1>
-	<form th:action="@{/officer/savePinjaman}">
+	<form th:action="@{/officer/simpanPinjaman}" method="POST">
 		<label>Tanggal Pinjaman</label><br></br> <input type="text"
-			readonly="readonly" th:value="${tanggal}"></input><br></br> 
+			readonly="readonly" th:value="${tanggal}" name="tanggalPinjaman"></input><br></br> 
 			<label>ID Anggota</label><br></br> 
 			<input type="text" name="idAnggota"></input><br></br>
 			<label>Jumlah</label><br></br> 
-			<input type="text" id="jumlah" name="jumlah"></input><br></br>
+			<input type="text" id="jumlah" name="jumlahPinjaman"></input><br></br>
 			<label>Durasi</label><br></br> 
-			<select id="durasi" name="durasi"><br></br>
+			<select id="durasi" name="waktu"><br></br>
 				<option>3</option>
 				<option>6</option>
 				<option>12</option>
 		</select><br></br> 
 		<label>Angsuran Bulanan</label><br></br> 
-		<input type="text" name="angsuran" id="angsuran"></input><br></br>
+		<input type="text" name="angsuranPokok" id="angsuran"></input><br></br>
 		<label>Ket</label><br></br>
 		<textarea rows="4" cols="" name="ket"></textarea><br></br>
 		<input type="submit" value="Simpan"></input>
