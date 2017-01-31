@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layoutadmin :: site-head">
+<title>Koperasi Mandiri | Admin</title>
+</head>
+<body>
+<header th:replace="layoutadmin :: site-header" >
+</header>
+	<h3>Detail Angsuran</h3>
+	    <div>
+	    	<form class="form-horizontal">
+	    		<div class="form-group">
+                    <label class="col-sm-2 control-label">Id Pengumuman:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${pengumuman.id}">Id</p></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Title :</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${pengumuman.title}">Title</p></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Content :</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${pengumuman.content}">Content</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Objective :</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${pengumuman.objective}">Objective</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Author :</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${pengumuman.author}">Author</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Date In :</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${pengumuman.dateIn}">Date In</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Date Expired :</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${pengumuman.dateExpired}">Date Expired</p>
+                    </div>
+                </div>
+            </form>
+	    </div>
+
+<footer th:replace="layoutadmin :: site-footer" ></footer>
+</body>
+</html>

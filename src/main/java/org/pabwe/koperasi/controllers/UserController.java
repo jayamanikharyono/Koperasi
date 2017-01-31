@@ -7,11 +7,13 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.pabwe.koperasi.models.Anggota;
 import org.pabwe.koperasi.models.Angsuran;
+import org.pabwe.koperasi.models.Pengumuman;
 import org.pabwe.koperasi.models.Pinjaman;
 import org.pabwe.koperasi.models.Simpanan;
 import org.pabwe.koperasi.models.User;
 import org.pabwe.koperasi.services.AnggotaService;
 import org.pabwe.koperasi.services.AngsuranService;
+import org.pabwe.koperasi.services.PengumumanService;
 import org.pabwe.koperasi.services.PinjamanService;
 import org.pabwe.koperasi.services.SimpananService;
 import org.pabwe.koperasi.services.UserService;
@@ -35,23 +37,28 @@ public class UserController {
 	SimpananService simpananService;
 	@Autowired
 	UserService userService;
+	@Autowired
+	PengumumanService pengumumanService;
 	
 	public String loginCheck(HttpServletRequest request)
 	{
-		if(((User) request.getSession().getAttribute("userLogin")).getRole().equalsIgnoreCase("user"))
+		userloggedin = (User) request.getSession().getAttribute("userloggedin");
+		if(userloggedin.getUsername().equalsIgnoreCase("logout") || !userloggedin.getRole().equalsIgnoreCase("user"))
 		{
-			return null;
+			return "redirect:/logout";
 		}
-		return "redirect:/";
+		return "login";
 	}
 	
 	@RequestMapping("/user/index")
 	public String userIndex(Model model, HttpServletRequest request)
 	{
 		loginCheck(request);
-		userloggedin = (User) request.getSession().getAttribute("userLogin");
-		model.addAttribute("loggedin",userloggedin.getFullName());
-		System.out.println("User");
+		List<Pengumuman> listPengumuman = pengumumanService.findLatestPengumumanUser();
+		model.addAttribute("allpengumuman", listPengumuman);
+		//userloggedin = (User) request.getSession().getAttribute("userLogin");
+		//model.addAttribute("loggedin",userloggedin.getFullName());
+		//System.out.println("User");
 		return "/user/index";
 	}
 	@RequestMapping("/user/detail")

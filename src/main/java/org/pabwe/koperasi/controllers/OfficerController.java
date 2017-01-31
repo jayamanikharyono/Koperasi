@@ -3,13 +3,16 @@ package org.pabwe.koperasi.controllers;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.pabwe.koperasi.models.Anggota;
+import org.pabwe.koperasi.models.Pengumuman;
 import org.pabwe.koperasi.models.Simpanan;
 import org.pabwe.koperasi.models.User;
 import org.pabwe.koperasi.services.AnggotaService;
+import org.pabwe.koperasi.services.PengumumanService;
 import org.pabwe.koperasi.services.SimpananService;
 import org.pabwe.koperasi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +29,26 @@ public class OfficerController {
 	SimpananService simpananService;
 	@Autowired
 	UserService userService;
+	@Autowired
+	PengumumanService pengumumanService;
+	
+	User userloggedin;
+	
+	public String loginCheck(HttpServletRequest request)
+	{
+		userloggedin = (User) request.getSession().getAttribute("userloggedin");
+		if(userloggedin.getUsername().equalsIgnoreCase("logout") || !userloggedin.getRole().equalsIgnoreCase("officer"))
+		{
+			return "redirect:/logout";
+		}
+		return "login";
+	}
 	
 	@RequestMapping("/officer/index")
-	public String petugasIndex()
+	public String petugasIndex(Model model)
 	{
+		List<Pengumuman> listPengumuman = pengumumanService.findLatestPengumumanOfficer();
+		model.addAttribute("allpengumuman", listPengumuman);
 		return "/officer/index";
 	}
 	

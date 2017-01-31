@@ -40,8 +40,8 @@ public class HomeController
 			userService.login(user.getUsername(), user.getPassword());
 			if(user.getRole()!=null)
 			{
-				request.getSession().setAttribute("userLogin", userService.login(username, password));
-				userloggedin = (User) request.getSession().getAttribute("userLogin");
+				request.getSession().setAttribute("userloggedin", userService.login(username, password));
+				userloggedin = (User) request.getSession().getAttribute("userloggedin");
 				System.out.println(userloggedin.getFullName());
 				if(userloggedin.getRole().equalsIgnoreCase("admin"))
 				{

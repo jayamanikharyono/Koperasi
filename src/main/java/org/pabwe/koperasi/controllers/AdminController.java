@@ -7,12 +7,14 @@ import javax.validation.Valid;
 
 import org.pabwe.koperasi.models.Anggota;
 import org.pabwe.koperasi.models.Angsuran;
+import org.pabwe.koperasi.models.Pengumuman;
 import org.pabwe.koperasi.models.Petugas;
 import org.pabwe.koperasi.models.Pinjaman;
 import org.pabwe.koperasi.models.Simpanan;
 import org.pabwe.koperasi.models.User;
 import org.pabwe.koperasi.services.AnggotaService;
 import org.pabwe.koperasi.services.AngsuranService;
+import org.pabwe.koperasi.services.PengumumanService;
 import org.pabwe.koperasi.services.PetugasService;
 import org.pabwe.koperasi.services.PinjamanService;
 import org.pabwe.koperasi.services.SimpananService;
@@ -35,45 +37,54 @@ public class AdminController
 	AngsuranService angsuranService;
 	@Autowired
 	PetugasService petugasService;
+	@Autowired
+	PengumumanService pengumumanService;
 	
 	User userloggedin;
 	
 	public String loginCheck(HttpServletRequest request)
 	{
-		if(((User) request.getSession().getAttribute("userLogin")).getRole().equalsIgnoreCase("admin"))
+		userloggedin = (User) request.getSession().getAttribute("userloggedin");
+		if(userloggedin.getUsername().equalsIgnoreCase("logout") || !userloggedin.getRole().equalsIgnoreCase("admin"))
 		{
-			return null;
+			return "redirect:/logout";
 		}
-		return "redirect:/";
+		return "login";
 	}
 	
 	@RequestMapping("/admin/index")
 	public String adminIndex(Model model, HttpServletRequest request)
 	{
-		loginCheck(request);
-		userloggedin = (User) request.getSession().getAttribute("userLogin");
+		if(loginCheck(request)=="logout")
+			return "redirect:/.";
+		userloggedin = (User) request.getSession().getAttribute("userloggedin");
+		List<Pengumuman> listPengumuman = pengumumanService.findLatestPengumuman();
+		model.addAttribute("allpengumuman", listPengumuman);
 		model.addAttribute("loggedin",userloggedin.getFullName());
-		System.out.println("Admin");
 		return "/admin/adminIndex";
 	}
 	@RequestMapping("admin/dashboard")
-	public String adminDashboard()
+	public String adminDashboard(HttpServletRequest request)
 	{
+		if(loginCheck(request)=="logout")
+			return "redirect:/.";
 		return "redirect:/admin/index";
 	}
 	
 	
-	@RequestMapping("admin/logout")
+	@RequestMapping("/logout")
 	public String logout(HttpServletRequest request)
 	{
-		userloggedin = null;
-		request.getSession().removeAttribute("userLogin");
-		return "redirect:/";
+		userloggedin.setUsername("logout");
+		request.getSession().setAttribute("userloggedin", userloggedin);
+		return "redirect:/.";
 	}
 	
 	@RequestMapping("/admin/insert")
 	public String insertForm(Model model,HttpServletRequest request)
 	{
+		if(loginCheck(request)=="logout")
+			return "redirect:/.";
 		model.addAttribute("anggota",new Anggota());
 		model.addAttribute("petugas", new Petugas());
 		return "/admin/insert";
@@ -107,13 +118,19 @@ public class AdminController
 	{
 		return "redirect:/allpetugas";
 	}
+	@RequestMapping("/admin/indexallpengumuman")
+	public String indexPengumuman()
+	{
+		return "redirect:/allpengumuman";
+	}
 	
 	
 	//redirect
 	@RequestMapping("allanggota")
 	public String allAnggota(Model model,HttpServletRequest request)
 	{
-		loginCheck(request);
+		if(loginCheck(request)=="logout")
+			return "redirect:/.";
 		List<Anggota> listAnggota = anggotaService.findAllAnggota();
 		model.addAttribute("allanggota",listAnggota);
 		return "/admin/allanggota";
@@ -121,7 +138,8 @@ public class AdminController
 	@RequestMapping("allpinjaman")
 	public String allPinjaman(Model model,HttpServletRequest request)
 	{
-		loginCheck(request);
+		if(loginCheck(request)=="logout")
+			return "redirect:/.";
 		List<Pinjaman> listPinjaman = pinjamanService.findAllPinjaman();
 		model.addAttribute("allpinjaman",listPinjaman);
 		return "/admin/allpinjaman";
@@ -129,7 +147,8 @@ public class AdminController
 	@RequestMapping("allsimpanan")
 	public String allSimpanan(Model model,HttpServletRequest request)
 	{
-		loginCheck(request);
+		if(loginCheck(request)=="logout")
+			return "redirect:/.";
 		List<Simpanan> listSimpanan = simpananService.findAllSimpanan();
 		model.addAttribute("allsimpanan",listSimpanan);
 		return "/admin/allsimpanan";
@@ -138,7 +157,8 @@ public class AdminController
 	@RequestMapping("allangsuran")
 	public String allAngsuran(Model model, HttpServletRequest request)
 	{
-		loginCheck(request);
+		if(loginCheck(request)=="logout")
+			return "redirect:/.";
 		List<Angsuran> listAngsuran = angsuranService.findAllAngsuran();
 		model.addAttribute("allangsuran", listAngsuran);
 		return "/admin/allangsuran";
@@ -146,11 +166,22 @@ public class AdminController
 	@RequestMapping("allpetugas")
 	public String allPetugas(Model model, HttpServletRequest request)
 	{
-		loginCheck(request);
+		if(loginCheck(request)=="logout")
+			return "redirect:/.";
 		List<Petugas> listPetugas = petugasService.findAllPetugas();
 		model.addAttribute("allpetugas", listPetugas);
 		return "/admin/allpetugas";
 	}
+	@RequestMapping("allpengumuman")
+	public String allPengumuman(Model model,HttpServletRequest request)
+	{
+		if(loginCheck(request) == "logout")
+			return "redirect:/.";
+		List<Pengumuman> listPengumuman =  pengumumanService.findAllPengumuman();
+		model.addAttribute("allpengumuman", listPengumuman);
+		return "/admin/allpengumuman";
+	}
+	
 	
 	
 	//Anggota
@@ -260,7 +291,27 @@ public class AdminController
 		petugasService.deleteById(id);
 		return "redirect:/admin/index";
 	}
-	
+	//Pengumuman
+	@RequestMapping("admin/pengumuman/{id}")
+	public String showPengumuman(@PathVariable Integer id, Model model)
+	{
+		model.addAttribute("pengumuman",pengumumanService.findById(id));
+		return "admin/pengumuman/show";
+	}
+		
+	@RequestMapping("admin/pengumuman/edit/{id}")
+	public String editPengumuman(@PathVariable Integer id, Model model)
+	{
+		model.addAttribute("pengumuman",pengumumanService.findById(id));
+		return "admin/petugas/edit";
+	}
+		
+	@RequestMapping("admin/pengumuman/delete/{id}")
+	public String deletePengumuman(@PathVariable Integer id)
+	{
+		petugasService.deleteById(id);
+		return "redirect:/admin/index";
+	}
 	
 	//Edit form
 	@RequestMapping("/editsimpanan")
@@ -292,6 +343,12 @@ public class AdminController
 	{
 		petugasService.edit(petugas);
 		return "redirect:/allpetugas";
+	}
+	@RequestMapping("/editpengumuman")
+	public String editPengumuman(@Valid Pengumuman pengumuman)
+	{
+		pengumumanService.edit(pengumuman);
+		return "redirect:/allpengumuman";
 	}
 	
 }
