@@ -16,7 +16,7 @@ public class Pinjaman {
 	private String namaAnggota;
 	private double jumlahPinjaman;
 	private String tanggalPinjam;
-	private String waktu;
+	private int waktu;
 	private double angsuranPokok; //total yang harus dibayar perbulan
 	private String status;
 	@Column(nullable = true)
@@ -27,10 +27,9 @@ public class Pinjaman {
 		super();
 	}
 	
-	public Pinjaman(int id, int idAnggota, String namaAnggota, double jumlahPinjaman, String tanggalPinjam,
-			String waktu, double angsuranPokok, String status, String ket, double angsuranTotal) {
+	public Pinjaman(int idAnggota, String namaAnggota, double jumlahPinjaman, String tanggalPinjam,
+			int waktu, double angsuranPokok, String status, String ket, double angsuranTotal) {
 		super();
-		this.id = id;
 		this.idAnggota = idAnggota;
 		this.namaAnggota = namaAnggota;
 		this.jumlahPinjaman = jumlahPinjaman;
@@ -71,10 +70,10 @@ public class Pinjaman {
 	public void setTanggalPinjam(String tanggalPinjam) {
 		this.tanggalPinjam = tanggalPinjam;
 	}
-	public String getWaktu() {
+	public int getWaktu() {
 		return waktu;
 	}
-	public void setWaktu(String waktu) {
+	public void setWaktu(int waktu) {
 		this.waktu = waktu;
 	}
 	public double getAngsuranPokok() {
