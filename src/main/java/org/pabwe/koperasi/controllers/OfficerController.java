@@ -50,14 +50,26 @@ public class OfficerController {
 		userloggedin = (User) request.getSession().getAttribute("userloggedin");
 		if(userloggedin.getUsername().equalsIgnoreCase("logout") || !userloggedin.getRole().equalsIgnoreCase("officer"))
 		{
-			return "redirect:/logout";
+			return "logout";
 		}
 		return "login";
 	}
 	
-	@RequestMapping("/officer/index")
-	public String petugasIndex(Model model)
+	@RequestMapping("/logout")
+	public String logout(HttpServletRequest request)
 	{
+		userloggedin.setUsername("logout");
+		request.getSession().setAttribute("userloggedin", userloggedin);
+		return "redirect:/.";
+	}
+	
+	
+	@RequestMapping("/officer/index")
+	public String petugasIndex(Model model, HttpServletRequest request)
+	{
+		if(loginCheck(request)=="logout")
+			return "redirect:/.";
+		userloggedin = (User) request.getSession().getAttribute("userloggedin");
 		List<Pengumuman> listPengumuman = pengumumanService.findLatestPengumumanOfficer();
 		model.addAttribute("allpengumuman", listPengumuman);
 		return "/officer/index";

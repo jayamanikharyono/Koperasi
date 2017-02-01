@@ -47,9 +47,17 @@ public class AdminController
 		userloggedin = (User) request.getSession().getAttribute("userloggedin");
 		if(userloggedin.getUsername().equalsIgnoreCase("logout") || !userloggedin.getRole().equalsIgnoreCase("admin"))
 		{
-			return "redirect:/logout";
+			return "logout";
 		}
 		return "login";
+	}
+
+	@RequestMapping("/logout")
+	public String logout(HttpServletRequest request)
+	{
+		userloggedin.setUsername("logout");
+		request.getSession().setAttribute("userloggedin", userloggedin);
+		return "redirect:/.";
 	}
 	
 	@RequestMapping("/admin/index")
@@ -69,15 +77,6 @@ public class AdminController
 		if(loginCheck(request)=="logout")
 			return "redirect:/.";
 		return "redirect:/admin/index";
-	}
-	
-	
-	@RequestMapping("/logout")
-	public String logout(HttpServletRequest request)
-	{
-		userloggedin.setUsername("logout");
-		request.getSession().setAttribute("userloggedin", userloggedin);
-		return "redirect:/.";
 	}
 	
 	@RequestMapping("/admin/insert")
