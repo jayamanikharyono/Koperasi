@@ -6,7 +6,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.pabwe.koperasi.models.Anggota;
-import org.pabwe.koperasi.models.Angsuran;
 import org.pabwe.koperasi.models.Pengumuman;
 import org.pabwe.koperasi.models.Pinjaman;
 import org.pabwe.koperasi.models.Simpanan;
@@ -24,7 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-public class UserController {
+public class UserController 
+{
 	
 	User userloggedin;
 	@Autowired
@@ -86,32 +86,11 @@ public class UserController {
 	public String indexuserall(Model model, HttpServletRequest request)
 	{
 		loginCheck(request);
-		List<Angsuran> listAngsuranAnggota = new ArrayList<>();
 		List<Pinjaman> listPinjamanAnggota =  new ArrayList<>();
 		List<Simpanan> listSimpananAnggota =  new ArrayList<>();
-		List<Pinjaman> listPinjaman = pinjamanService.findAllPinjaman();
-		List<Angsuran> listAngsuran = angsuranService.findAllAngsuran();
-		//List<Simpanan> listSimpanan = simpananService.findAllSimpanan();
 		Anggota anggota = anggotaService.findByName(userloggedin.getFullName());
 		listSimpananAnggota = simpananService.findByIdAnggota(anggota.getId());
-		System.out.println(listPinjamanAnggota.size());
-		//for(Simpanan simpanan : listSimpanan)
-		//{
-		//	if(simpanan.getIdAnggota() == anggota.getId())
-		//		listSimpananAnggota.add(simpanan);
-		//}
-		for(int i =0;i<listPinjaman.size();i++)
-		{
-			if(listPinjaman.get(i).getIdAnggota() == anggota.getId())
-				listPinjamanAnggota.add(listPinjaman.get(i));
-			for(int j=0;j<listAngsuran.size();j++)
-			{
-				if(listPinjamanAnggota.get(i).getId()== listAngsuran.get(j).getIdPinjaman())
-					listAngsuranAnggota.add(listAngsuran.get(j));
-				
-			}
-		}
-		model.addAttribute("angsuranuser", listAngsuranAnggota);
+		listPinjamanAnggota = pinjamanService.findByIdAnggota(anggota.getId());
 		model.addAttribute("simpananuser", listSimpananAnggota);
 		model.addAttribute("pinjamanuser", listPinjamanAnggota);
 		return "user/indexall";

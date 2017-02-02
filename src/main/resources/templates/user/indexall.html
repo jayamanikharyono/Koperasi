@@ -7,35 +7,9 @@
 <header th:replace="layoutuser :: site-header" >
 </header>
 	  <div id="pinjaman">
-	    <h3>Angsuran</h3>
-	    <div class="panel panel-default">
-	    	<div class="panel-heading">Daftar Angsuran,  <span class="label label-default" th:text="${loggedin}"></span></div>
-	    	<div class="panel-body">
-			    <table class="table .table-striped">
-			    	<tr>
-			    		<th>Id</th>
-			    		<th>Id Pinjaman</th>
-			    		<th>Tanggal Jatuh Tempo</th>
-			    		<th>Tanggal Bayar</th>
-			    		<th>Jumlah</th>
-			    		<th>Keterangan</th>
-			    	</tr>
-			    	<tr th:each="angsuran : ${angsuranuser}">
-			    		<td th:text="${angsuran.id}"></td>
-			    		<td th:text="${angsuran.idPinjaman}"></td>
-			    		<td th:text="${angsuran.tanggalJatuhTempo}"></td>
-			    		<td th:text="${angsuran.tanggalBayar}"></td>
-			    		<td th:text="${angsuran.jumlah}"></td>
-			    		<td th:text="${angsuran.keterangan}"></td>
-			    	</tr>
-			    </table>
-			</div>
-		</div>
-	  </div>
-	  <div id="pinjaman">
 	    <h3>Pinjaman</h3>
 	    <div class="panel panel-default">
-	    	<div class="panel-heading">Daftar Pinjaman</div>
+	    	<div class="panel-heading">Daftar Pinjaman Terakhir</div>
 	    	<div class="panel-body">
 			    <table class="table .table-striped">
 			    	<tr>
@@ -48,6 +22,7 @@
 			    		<th>Status</th>
 			    		<th>Keterangan</th>
 			    		<th>Angsuran Total</th>
+			    		<th>Opsi</th>
 			    	</tr>
 			    	<tr th:each="pinjaman : ${pinjamanuser}">
 			    		<td th:text="${pinjaman.idAnggota}"></td>
@@ -59,6 +34,9 @@
 			    		<td th:text="${pinjaman.status}"></td>
 			    		<td th:text="${pinjaman.ket}"></td>
 			    		<td th:text="${pinjaman.angsuranTotal}"></td>
+			    		<td>
+			    			<a th:href="@{'/admin/pinjaman/' + ${pinjaman.id}}"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+			    		</td>
 			    	</tr>
 			    </table>
 			</div>
@@ -67,7 +45,7 @@
 	  <div id="simpanan" >
 	    <h3>Simpanan</h3>
 	    <div class="panel panel-default">
-	    	<div class="panel-heading">Daftar Simpanan</div>
+	    	<div class="panel-heading">Daftar Simpanan Terakhir</div>
 	    	<div class="panel-body">
 		    <table class="table .table-striped">
 		    	<tr>
