@@ -55,15 +55,6 @@ public class OfficerController {
 		return "login";
 	}
 	
-	@RequestMapping("/logout")
-	public String logout(HttpServletRequest request)
-	{
-		userloggedin.setUsername("logout");
-		request.getSession().setAttribute("userloggedin", userloggedin);
-		return "redirect:/.";
-	}
-	
-	
 	@RequestMapping("/officer/index")
 	public String petugasIndex(Model model, HttpServletRequest request)
 	{

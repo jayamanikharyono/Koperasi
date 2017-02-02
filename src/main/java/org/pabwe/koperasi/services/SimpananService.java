@@ -11,4 +11,5 @@ public interface SimpananService
 	Simpanan findById(int idSimpanan);
 	void edit(Simpanan simpanan);
 	void deleteById(int idSimpanan);
+	public List<Simpanan> findByIdAnggota(int idAnggota);
 }

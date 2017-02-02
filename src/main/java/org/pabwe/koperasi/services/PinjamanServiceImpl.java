@@ -57,6 +57,11 @@ public class PinjamanServiceImpl implements PinjamanService
 		return saved.getId();
 	}
 
+	@Override
+	public List<Pinjaman> findByIdAnggota(int idAnggota) {
+		return pinjamanRepository.getPinjamanByIdAnggota(idAnggota);
+	}
+
 	
 	
 }

@@ -76,14 +76,6 @@ public class UserController {
 		return "redirect:/user/index";
 	}
 	
-	@RequestMapping("user/logout")
-	public String logout(HttpServletRequest request)
-	{
-		userloggedin = null;
-		request.getSession().removeAttribute("userLogin");
-		return "redirect:/.";
-	}
-	
 	@RequestMapping("/user/all")
 	public String indexPinjaman()
 	{
@@ -99,14 +91,15 @@ public class UserController {
 		List<Simpanan> listSimpananAnggota =  new ArrayList<>();
 		List<Pinjaman> listPinjaman = pinjamanService.findAllPinjaman();
 		List<Angsuran> listAngsuran = angsuranService.findAllAngsuran();
-		List<Simpanan> listSimpanan = simpananService.findAllSimpanan();
+		//List<Simpanan> listSimpanan = simpananService.findAllSimpanan();
 		Anggota anggota = anggotaService.findByName(userloggedin.getFullName());
-		System.out.println(anggota.getNama());
-		for(Simpanan simpanan : listSimpanan)
-		{
-			if(simpanan.getIdAnggota() == anggota.getId())
-				listSimpananAnggota.add(simpanan);
-		}
+		listSimpananAnggota = simpananService.findByIdAnggota(anggota.getId());
+		System.out.println(listPinjamanAnggota.size());
+		//for(Simpanan simpanan : listSimpanan)
+		//{
+		//	if(simpanan.getIdAnggota() == anggota.getId())
+		//		listSimpananAnggota.add(simpanan);
+		//}
 		for(int i =0;i<listPinjaman.size();i++)
 		{
 			if(listPinjaman.get(i).getIdAnggota() == anggota.getId())

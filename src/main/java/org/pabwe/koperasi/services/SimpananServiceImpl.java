@@ -36,6 +36,11 @@ public class SimpananServiceImpl implements SimpananService
 	public void deleteById(int idSimpanan) {
 		simpananRepository.delete(idSimpanan);
 	}
+
+	@Override
+	public List<Simpanan> findByIdAnggota(int idAnggota) {
+		return simpananRepository.getSimpananByIdAnggota(idAnggota);
+	}
 }
 
 	

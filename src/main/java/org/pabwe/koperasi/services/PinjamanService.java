@@ -15,4 +15,5 @@ public interface PinjamanService
 	Pinjaman edit(Pinjaman pinjaman);
 	void deleteById(int idPinjaman);
 	public int saveGetId(Pinjaman pinjaman);
+	public List<Pinjaman> findByIdAnggota(int idAnggota);
 }
