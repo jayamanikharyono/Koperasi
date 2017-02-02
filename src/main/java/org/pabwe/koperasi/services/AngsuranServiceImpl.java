@@ -40,5 +40,10 @@ public class AngsuranServiceImpl implements AngsuranService
 		angsuranRepository.delete(idAngsuran);
 		
 	}
+
+	@Override
+	public List<Angsuran> findAngsuranByIdPinjaman(int idPinjaman) {
+		return angsuranRepository.findAngsuranByIdPinjaman(idPinjaman);
+	}
 	
 }

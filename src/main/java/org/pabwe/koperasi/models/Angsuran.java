@@ -16,6 +16,8 @@ public class Angsuran {
 	@Column(nullable = true)
 	private String tanggalBayar;
 	@Column(nullable = true)
+	private double denda;
+	@Column(nullable = true)
 	private double jumlah;
 	@Column(nullable = true)
 	private String keterangan;
@@ -39,6 +41,15 @@ public class Angsuran {
 	public Angsuran() {
 		super();
 	}
+	
+	public double getDenda() {
+		return denda;
+	}
+
+	public void setDenda(double denda) {
+		this.denda = denda;
+	}
+
 	public int getId() {
 		return id;
 	}

@@ -24,6 +24,7 @@ import org.pabwe.koperasi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -163,5 +164,14 @@ public class OfficerController {
 		}
 		
 		return "officer/index";
+	}
+	
+	@RequestMapping("officer/pinjaman/{id}")
+	public String showAngsuran(Model model, @PathVariable int id){
+		List<Angsuran> allAngsuran = angsuranService.findAngsuranByIdPinjaman(id);
+		Pinjaman pinjaman = pinjamanService.findById(id);
+		model.addAttribute("pinjaman", pinjaman);
+		model.addAttribute("allAngsuran", allAngsuran);
+		return "officer/showangsuran";
 	}
 }
