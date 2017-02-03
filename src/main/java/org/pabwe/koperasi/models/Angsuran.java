@@ -16,7 +16,7 @@ public class Angsuran {
 	@Column(nullable = true)
 	private String tanggalBayar;
 	@Column(nullable = true)
-	private double denda;
+	private double denda = 0.0;
 	@Column(nullable = true)
 	private double jumlah;
 	@Column(nullable = true)
