@@ -90,34 +90,34 @@ public class AdminController
 	}
 
 	//index all entity
-	@RequestMapping("/admin/indexallsimpanan")
+	@RequestMapping("/simpanan/indexallsimpanan")
 	public String indexSimpanan()
 	{
 		return "redirect:/allsimpanan";
 	}
 		
-	@RequestMapping("/admin/indexallpinjaman")
+	@RequestMapping("/pinjaman/indexallpinjaman")
 	public String indexPinjaman()
 	{
 		return "redirect:/allpinjaman";
 	}
 	
-	@RequestMapping("/admin/indexallanggota")
+	@RequestMapping("/anggota/indexallanggota")
 	public String indexAnggota()
 	{
 		return "redirect:/allanggota";
 	}
-	@RequestMapping("/admin/indexallangsuran")
+	@RequestMapping("/angsuran/indexallangsuran")
 	public String indexAngsuran()
 	{
 		return "redirect:/allangsuran";
 	}
-	@RequestMapping("/admin/indexallpetugas")
+	@RequestMapping("/petugas/indexallpetugas")
 	public String indexPetugas()
 	{
 		return "redirect:/allpetugas";
 	}
-	@RequestMapping("/admin/indexallpengumuman")
+	@RequestMapping("/pengumuman/indexallpengumuman")
 	public String indexPengumuman()
 	{
 		return "redirect:/allpengumuman";
@@ -188,14 +188,14 @@ public class AdminController
 	public String showAnggota(@PathVariable Integer id, Model model)
 	{
 		model.addAttribute("anggota",anggotaService.findById(id));
-		return "admin/anggota/show";
+		return "shared/anggota/show";
 	}
 	
 	@RequestMapping("admin/anggota/edit/{id}")
 	public String editAnggota(@PathVariable Integer id, Model model)
 	{
 		model.addAttribute("anggota",anggotaService.findById(id));
-		return "admin/anggota/edit";
+		return "shared/anggota/edit";
 	}
 	
 	@RequestMapping("admin/anggota/delete/{id}")
@@ -210,14 +210,14 @@ public class AdminController
 	public String showSimpanan(@PathVariable Integer id, Model model)
 	{
 		model.addAttribute("simpanan",simpananService.findById(id));
-		return "admin/simpanan/show";
+		return "shared/simpanan/show";
 	}
 	
 	@RequestMapping("admin/simpanan/edit/{id}")
 	public String editSimpanan(@PathVariable Integer id, Model model)
 	{
 		model.addAttribute("simpanan",simpananService.findById(id));
-		return "admin/simpanan/edit";
+		return "shared/simpanan/edit";
 	}
 	
 	@RequestMapping("admin/simpanan/delete/{id}")
@@ -232,14 +232,14 @@ public class AdminController
 	public String showPinjaman(@PathVariable Integer id, Model model)
 	{
 		model.addAttribute("pinjaman",pinjamanService.findById(id));
-		return "admin/pinjaman/show";
+		return "shared/pinjaman/show";
 	}
 	
 	@RequestMapping("admin/pinjaman/edit/{id}")
 	public String editPinjaman(@PathVariable Integer id, Model model)
 	{
 		model.addAttribute("pinjaman",pinjamanService.findById(id));
-		return "admin/pinjaman/edit";
+		return "shared/pinjaman/edit";
 	}
 	
 	@RequestMapping("admin/pinjaman/delete/{id}")
@@ -253,14 +253,14 @@ public class AdminController
 	public String showAngsuran(@PathVariable Integer id, Model model)
 	{
 		model.addAttribute("angsuran",angsuranService.findById(id));
-		return "admin/angsuran/show";
+		return "shared/angsuran/show";
 	}
 	
 	@RequestMapping("admin/angsuran/edit/{id}")
 	public String editAngsuran(@PathVariable Integer id, Model model)
 	{
 		model.addAttribute("angsuran",angsuranService.findById(id));
-		return "admin/angsuran/edit";
+		return "shared/angsuran/edit";
 	}
 	
 	@RequestMapping("admin/angsuran/delete/{id}")
@@ -274,14 +274,14 @@ public class AdminController
 	public String showPetugas(@PathVariable Integer id, Model model)
 	{
 		model.addAttribute("petugas",petugasService.findById(id));
-		return "admin/petugas/show";
+		return "shared/petugas/show";
 	}
 	
 	@RequestMapping("admin/petugas/edit/{id}")
 	public String editPetugas(@PathVariable Integer id, Model model)
 	{
 		model.addAttribute("petugas",petugasService.findById(id));
-		return "admin/petugas/edit";
+		return "shared/petugas/edit";
 	}
 	
 	@RequestMapping("admin/petugas/delete/{id}")
@@ -295,14 +295,14 @@ public class AdminController
 	public String showPengumuman(@PathVariable Integer id, Model model)
 	{
 		model.addAttribute("pengumuman",pengumumanService.findById(id));
-		return "admin/pengumuman/show";
+		return "shared/pengumuman/show";
 	}
 		
 	@RequestMapping("admin/pengumuman/edit/{id}")
 	public String editPengumuman(@PathVariable Integer id, Model model)
 	{
 		model.addAttribute("pengumuman",pengumumanService.findById(id));
-		return "admin/petugas/edit";
+		return "shared/petugas/edit";
 	}
 		
 	@RequestMapping("admin/pengumuman/delete/{id}")
