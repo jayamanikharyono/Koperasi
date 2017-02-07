@@ -3,6 +3,9 @@ package org.pabwe.koperasi.controllers;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -56,6 +59,13 @@ public class OfficerController {
 		return "login";
 	}
 	
+	@RequestMapping("officer/dashboard")
+	public String adminDashboard(HttpServletRequest request)
+	{
+		if(loginCheck(request)=="logout")
+			return "redirect:/.";
+		return "redirect:/officer/index";
+	}
 	@RequestMapping("/officer/index")
 	public String petugasIndex(Model model, HttpServletRequest request)
 	{
@@ -107,7 +117,7 @@ public class OfficerController {
 		} else if(simpanan < 50000 && tipeSimpanan.equals("Simpanan Wajib")){
 			String warning = "Simpanan wajib harus 50000";
 			model.addAttribute("warning", warning);
-			return "/officer/formSimpanan";
+			return "redirect:/officer/simpan";
 		} else {
 			double tambahSimpanan = anggota.getBanyakSimpananWajib() + simpanan;
 			anggota.setBanyakSimpananWajib(tambahSimpanan);
@@ -174,4 +184,89 @@ public class OfficerController {
 		model.addAttribute("allAngsuran", allAngsuran);
 		return "officer/showangsuran";
 	}
+	
+	@RequestMapping("/officer/angsuran/{id}")
+	public String bayarAngsuran(@PathVariable int id, Model model) throws ParseException{
+		Angsuran angsuran = angsuranService.findById(id);
+		Pinjaman pinjaman = pinjamanService.findById(angsuran.getIdPinjaman());
+		DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+		Date tanggalJatuhTempo_1 = df.parse(angsuran.getTanggalJatuhTempo());
+		final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		LocalDate tanggalJatuhTempo = LocalDate.parse(angsuran.getTanggalJatuhTempo(), formatter);
+		Date tanggalSekarang = new Date();
+		String tanggal = df.format(tanggalSekarang);
+		LocalDate tanggalBayar = LocalDate.parse(tanggal, formatter);
+		if(tanggalSekarang.after(tanggalJatuhTempo_1)){
+			long telat = ChronoUnit.DAYS.between(tanggalBayar, tanggalJatuhTempo);
+			double denda = telat * (1/100 * pinjaman.getAngsuranPokok());
+			double total = denda + pinjaman.getAngsuranPokok();
+			model.addAttribute("pinjaman", pinjaman);
+			model.addAttribute("angsuran", angsuran);
+			model.addAttribute("tanggal", tanggal);
+			model.addAttribute("telat", telat);
+			model.addAttribute("denda", denda);
+			model.addAttribute("biaya", total);
+			return "officer/formangsuran";
+		} else {
+			long telat = 0;
+			double denda = 0;
+			double total = denda + pinjaman.getAngsuranPokok();
+			model.addAttribute("pinjaman", pinjaman);
+			model.addAttribute("angsuran", angsuran);
+			model.addAttribute("tanggal", tanggal);
+			model.addAttribute("telat", telat);
+			model.addAttribute("denda", denda);
+			model.addAttribute("biaya", total);
+			return "officer/formangsuran";
+		}
+	}
+	
+	@RequestMapping("officer/simpanangsuran/{id}")
+	public String simpanAngsuran(Model model, HttpServletRequest request, @PathVariable int id){
+		String tanggal = request.getParameter("tanggalBayar");
+		double denda = Double.parseDouble(request.getParameter("denda"));
+		int telat = Integer.parseInt(request.getParameter("telat"));
+		double biaya = Double.parseDouble(request.getParameter("biaya"));
+		Angsuran angsuran = angsuranService.findById(id);
+		angsuran.setDenda(denda);
+		angsuran.setTanggalBayar(tanggal);
+		angsuran.setJumlah(biaya);
+		angsuran.setKeterangan("Lunas");
+		angsuranService.save(angsuran);
+		return "redirect:/officer/index";
+	}
+	
+	//index all entity
+		@RequestMapping("/officer/indexallsimpanan")
+		public String indexSimpanan()
+		{
+			return "redirect:/allsimpanan";
+		}
+			
+		@RequestMapping("/officer/indexallpinjaman")
+		public String indexPinjaman()
+		{
+			return "redirect:/allpinjaman";
+		}
+		
+		@RequestMapping("/officer/indexallanggota")
+		public String indexAnggota()
+		{
+			return "redirect:/allanggota";
+		}
+		@RequestMapping("/officer/indexallangsuran")
+		public String indexAngsuran()
+		{
+			return "redirect:/allangsuran"; 
+		}
+		@RequestMapping("/officer/indexallpetugas")
+		public String indexPetugas()
+		{
+			return "redirect:/allpetugas";
+		}
+		@RequestMapping("/officer/indexallpengumuman")
+		public String indexPengumuman()
+		{
+			return "redirect:/allpengumuman";
+		}
 }

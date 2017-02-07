@@ -5,7 +5,11 @@
 </head>
 <body>
 	<header th:replace="layoutadmin :: site-header"> </header>
-	<h3>Tambah Simpanan</h3>
+	<div class="container">
+		<h1>Simpanan</h1>
+		<div class="panel panel-default">
+	    	<div class="panel-heading">Tambah Simpanan</div>
+	    	<div class="panel-body">
 	<h4 th:text="${warning}"></h4>
 	<form th:action="@{/officer/saveSimpanan}" method="POST">
 		<label>Tanggal Simpanan</label><br></br>
@@ -23,5 +27,8 @@
 		<textarea rows="4" cols="" name="ket"></textarea><br></br>
 		<input type="submit" value="Simpan"></input>
 	</form>
+	</div>
+	</div>
+	</div>
 	</body>
 </html>

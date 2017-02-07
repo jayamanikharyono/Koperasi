@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layoutadmin :: site-head">
+<head th:replace="layoutuser :: site-head">
 <script src="/public/js/jquery.min.js"></script>
 <title>Koperasi Mandiri | Admin</title>
 </head>
 <body>
+<header th:replace="layoutuser :: site-header" ></header>
 	<div class="container">
 		<h1>Pinjaman</h1>
 		<div class="panel panel-default">
 	    	<div class="panel-heading">Ajukan</div>
 	    	<div class="panel-body">
-	<form th:action="@{/officer/simpanPinjaman}" method="POST">
+	<form th:action="@{/user/savePinjaman}" method="POST" class="form-horizontal">
 		<label>Tanggal Pinjaman</label><br></br> <input type="text"
 			readonly="readonly" th:value="${tanggal}" name="tanggalPinjaman"></input><br></br> 
 			<label>ID Anggota</label><br></br> 
-			<input type="text" name="idAnggota"></input><br></br>
+			<input type="text" name="idAnggota" value="1" readonly="readonly"></input><br></br>
 			<label>Jumlah</label><br></br> 
 			<input type="text" id="jumlah" name="jumlahPinjaman"></input><br></br>
 			<label>Durasi</label><br></br> 
@@ -32,6 +33,7 @@
 	</div>
 	</div>
 	</div>
+<footer th:replace="layoutuser :: site-footer" ></footer>
 </body>
 <script type="text/javascript">
 $("#jumlah").keyup(function(){

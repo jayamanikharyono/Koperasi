@@ -45,9 +45,10 @@ public class AdminController
 	public String loginCheck(HttpServletRequest request)
 	{
 		userloggedin = (User) request.getSession().getAttribute("userloggedin");
-		if(userloggedin.getUsername().equalsIgnoreCase("logout") || !userloggedin.getRole().equalsIgnoreCase("admin"))
+		if(userloggedin.getUsername().equalsIgnoreCase("logout"))
 		{
-			return "logout";
+			if((!userloggedin.getRole().equalsIgnoreCase("admin")) || (!userloggedin.getRole().equalsIgnoreCase("officer")))
+				return "logout";
 		}
 		return "login";
 	}
@@ -90,34 +91,34 @@ public class AdminController
 	}
 
 	//index all entity
-	@RequestMapping("/simpanan/indexallsimpanan")
+	@RequestMapping("/admin/indexallsimpanan")
 	public String indexSimpanan()
 	{
 		return "redirect:/allsimpanan";
 	}
 		
-	@RequestMapping("/pinjaman/indexallpinjaman")
+	@RequestMapping("/admin/indexallpinjaman")
 	public String indexPinjaman()
 	{
 		return "redirect:/allpinjaman";
 	}
 	
-	@RequestMapping("/anggota/indexallanggota")
+	@RequestMapping("/admin/indexallanggota")
 	public String indexAnggota()
 	{
 		return "redirect:/allanggota";
 	}
-	@RequestMapping("/angsuran/indexallangsuran")
+	@RequestMapping("/admin/indexallangsuran")
 	public String indexAngsuran()
 	{
 		return "redirect:/allangsuran";
 	}
-	@RequestMapping("/petugas/indexallpetugas")
+	@RequestMapping("/admin/indexallpetugas")
 	public String indexPetugas()
 	{
 		return "redirect:/allpetugas";
 	}
-	@RequestMapping("/pengumuman/indexallpengumuman")
+	@RequestMapping("/admin/indexallpengumuman")
 	public String indexPengumuman()
 	{
 		return "redirect:/allpengumuman";

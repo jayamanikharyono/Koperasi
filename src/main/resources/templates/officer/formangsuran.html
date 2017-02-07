@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layoutadmin :: site-head">
+<script src="/public/js/jquery.min.js"></script>
+<title>Koperasi Mandiri | Admin</title>
+</head>
+<body>
+
+	<h1>Detail Pinjaman</h1>
+	<table class=" table.table-stripped">
+		<tr>
+			<th>Id Pinjaman</th>
+			<th>Tanggal Pinjam</th>
+			<th>Nama Anggota</th>
+			<th>Jumlah Pinjaman</th>
+			<th>Angsuran Pokok</th>
+			<th>Jangka Waktu</th>
+			<th>Angsuran Total</th>
+			<th>Status</th>
+			<th>Keterangan</th>
+		</tr>
+		<tr>
+			<td th:text="${pinjaman.id}"></td>
+			<td th:text="${pinjaman.tanggalPinjam}"></td>
+			<td th:text="${pinjaman.namaAnggota}"></td>
+			<td th:text="${pinjaman.jumlahPinjaman}"></td>
+			<td th:text="${pinjaman.angsuranPokok}"></td>
+			<td th:text="${pinjaman.waktu} "> Bulan</td>
+			<td th:text="${pinjaman.angsuranTotal}"></td>
+			<td th:text="${pinjaman.status}"></td>
+			<td th:text="${pinjaman.ket}"></td>
+		</tr>
+	</table>
+	<h1>Angsuran</h1>
+	<form th:action="@{'/officer/simpanangsuran/' + ${angsuran.id}}">
+		<label>Tanggal Jatuh Tempo</label><br></br>
+		<input type="text" th:value="${angsuran.tanggalJatuhTempo}" readonly="readonly"></input><br></br>
+		<label>Tanggal Bayar</label><br></br>
+		<input type="text" th:value="${tanggal}" name="tanggalBayar" readonly="readonly"></input><br></br>
+		<label>Telat (hari)</label><br></br>
+		<input type="text" readonly="readonly" th:value="${telat}" name="telat"></input><br></br>
+		<label>Denda</label><br></br>
+		<input type="text" readonly="readonly" th:value="${denda}" name="denda"></input><br></br>
+		<label>Biaya</label><br></br>
+		<input type="text" readonly="readonly" th:value="${biaya}" name="biaya"></input><br></br>
+		<input type="submit" value="Bayar"></input>
+	</form>
+</body>
+</html>

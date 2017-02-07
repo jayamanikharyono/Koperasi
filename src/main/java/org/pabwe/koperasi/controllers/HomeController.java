@@ -49,6 +49,7 @@ public class HomeController
 				}
 				else if(userloggedin.getRole().equalsIgnoreCase("user"))
 				{
+					model.addAttribute("anggota", anggotaService.findByName(userloggedin.getFullName()));
 					return "redirect:/user/index";
 				}
 				else if(userloggedin.getRole().equalsIgnoreCase("officer"))

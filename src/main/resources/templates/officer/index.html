@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout :: site-head">
-<title>Welcome to Spring Ticket</title>
+<head th:replace="layoutofficer :: site-head">
+<title>Koperasi Mandiri</title>
 </head>
 <body>
-<header th:replace="layout :: site-header" >
+<header th:replace="layoutofficer :: site-header" >
 </header>
 	<div class="jumbotron">
 	  <h1>Petugas</h1>
 	  <p>Koperasi Mandiri</p>
 	  <a th:href="@{/officer/formanggota}">Tambah Anggota</a>
+	  <a th:href="@{'/officer/simpan/'}">Tambah Simpanan</a>
+	  <a th:href="@{'/officer/pinjaman'}">Tambah Pinjaman</a>
 	</div>
 	<div class="container">
 			<div class="panel panel-default">
@@ -29,6 +31,6 @@
 			</div>
 			</div>
 		</div>
-<footer th:replace="layout :: site-footer" ></footer>
+<footer th:replace="layoutofficer :: site-footer" ></footer>
 </body>
 </html>

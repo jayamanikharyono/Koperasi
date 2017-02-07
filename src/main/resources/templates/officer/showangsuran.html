@@ -4,8 +4,9 @@
 <title>Koperasi Mandiri | Admin</title>
 </head>
 <body>
-	<h1>Detail Pinjaman</h1>
-	<table>
+	<div class="container">
+		<h1>Detail Pinjaman</h1>
+	<table class="table .table-striped">
 		<tr>
 			<th>Id Pinjaman</th>
 			<th>Tanggal Pinjam</th>
@@ -30,8 +31,9 @@
 		</tr>
 	</table>
 	<br></br>
-	<h1>Histori Pembayaran Angsuran</h1>
-	<table>
+	<div class="container">
+		<h1>Histori Pembayaran Angsuran</h1>
+	<table class="table .table-stripped">
 		<tr>
 			<th>Tanggal Jatuh Tempo</th>
 			<th>Tanggal Bayar</th>
@@ -46,7 +48,12 @@
 			<td th:text="${angsuran.denda}"></td>
 			<td th:text="${angsuran.jumlah}"></td>
 			<td th:text="${angsuran.keterangan}"></td>
+			<td>
+				<a th:href="@{'/officer/angsuran/' + ${angsuran.id}}"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+			</td>
 		</tr>
 	</table>
+	</div>
+	</div>
 </body>
 </html>
